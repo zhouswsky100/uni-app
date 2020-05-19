@@ -1,0 +1,11 @@
+.p-name {
+  width: 200rpx;
+}
+.status-title {
+  color: #fff;
+  background: #bbb;
+}
+.status-title.active {
+    background: #157BC7;
+}
+

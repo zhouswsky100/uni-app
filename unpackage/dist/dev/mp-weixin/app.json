@@ -1,0 +1,54 @@
+{
+  "pages": [
+    "pages/appointment/index/index",
+    "pages/appointment/search/search",
+    "pages/appointment/hospital-dept/hospital-dept",
+    "pages/appointment/user/user",
+    "pages/appointment/dept-detal/dept-detal",
+    "pages/appointment/doctor-info/doctor-info",
+    "pages/appointment/hospital-dept/hospital-info",
+    "pages/appointment/login/login",
+    "pages/appointment/doctor-info/doctor-detail",
+    "pages/appointment/order/order",
+    "pages/appointment/order/orderDetail",
+    "pages/appointment/order/orderInfo",
+    "pages/appointment/select-patient/select-patient",
+    "pages/appointment/select-patient/patient-manage",
+    "pages/appointment/select-patient/add-doctorm",
+    "pages/appointment/select-patient/basisinformation",
+    "pages/appointment/card/id-type-card",
+    "pages/appointment/card/add-patient-card",
+    "pages/appointment/card/insert-patient-card",
+    "pages/appointment/pay/pay"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarBackgroundColor": "#157BC7",
+    "backgroundColor": "#157BC7"
+  },
+  "tabBar": {
+    "color": "#7a7e83",
+    "selectedColor": "#0faeff",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/appointment/index/index",
+        "iconPath": "static/home.png",
+        "selectedIconPath": "static/homeHL.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/appointment/user/user",
+        "iconPath": "static/user.png",
+        "selectedIconPath": "static/userHL.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "usingComponents": {
+    "uni-load-more": "/components/uni-load-more/uni-load-more",
+    "light-modal": "/components/light-modal/light-modal"
+  }
+}

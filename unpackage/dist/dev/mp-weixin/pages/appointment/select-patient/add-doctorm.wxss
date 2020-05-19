@@ -1,0 +1,30 @@
+
+.selfss{
+	color:#555 !important;
+}
+.cu-form-group uni-picker .picker {
+	text-align: left;
+	color:#aaa;
+}
+.sub-list{
+	padding:0 20rpx;
+	height:90rpx;
+	line-height: 90rpx;
+	background: #fff;
+}
+.sub-list-box{
+	
+	background: #f2f2f2;
+}
+.cu-form-group .title{
+	width:200rpx;
+	font-size:28rpx;
+}
+.cu-form-group uni-input{
+	font-size:28rpx;
+}
+.uni-input-placeholder{
+	font-size:28rpx;
+	color:#aaa;
+}
+

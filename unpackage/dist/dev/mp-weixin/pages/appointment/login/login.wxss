@@ -1,0 +1,50 @@
+.input-view {
+  position: relative;
+}
+.input-card {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 3;
+  width: 100%;
+}
+.input-bg-box {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 40vh 100rpx 0 100rpx;
+}
+.pic {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  width: 100vw;
+  height: 100vh;
+}
+.parent-input-box {
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.input-box {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  height: 88rpx;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  border-bottom: 1px solid #f2f2f2;
+}
+.input {
+  border: none;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  background: none;
+}
+.uni-input-placeholder {
+  font-size: 28rpx;
+  color: #fff;
+}
+

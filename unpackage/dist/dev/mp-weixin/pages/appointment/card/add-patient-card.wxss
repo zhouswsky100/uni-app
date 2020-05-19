@@ -1,0 +1,40 @@
+.warp {
+  font-size: 30rpx;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+}
+.self-style {
+  font-size: 34rpx;
+}
+.dept-list-box {
+  min-height: 1000rpx;
+}
+.dept-list-box .dept-list-left {
+    -webkit-box-flex: 2;
+    -webkit-flex: 2;
+            flex: 2;
+    background-color: #eee;
+}
+.dept-list-box .dept-list-right {
+    -webkit-box-flex: 3;
+    -webkit-flex: 3;
+            flex: 3;
+}
+.dept-list-box .dept-list-right .dept-item {
+      padding: 15rpx;
+}
+.dept-list-box .dept-list-right .dept-item text {
+        color: #333;
+}
+.left-aside {
+  height: 100%;
+  background: #f2f2f2;
+}
+.f-item {
+  padding: 15rpx;
+}
+.f-item.active {
+    background: #fff;
+}
+
