@@ -22,9 +22,9 @@
 					<image class="outer4" src="@/static/health/date.png" ></image>
 					<view class="outer5">建档时间：2020-05-07</view>
 				</view>
-				<view class="nextBox">随访</view>
+				<view class="nextBox" @click="goManage()">随访</view>
 				<view class="contentFooter">
-					<view class="footerBox">
+					<view class="footerBox" @click="checkManage()">
 						<view class="outer6">随访记录</view>
 						<view class="outer6 outer7">查看 <image class="outer8" src="@/static/health/next.png"></image></view>
 					</view>
@@ -154,6 +154,16 @@
 			changeType(id){
 				this.toggleId = id;
 			},
+			checkManage(){
+				uni.navigateTo({
+				    url: '/pages/bsoftMedical/health/check-manage'
+				});
+			},
+			goManage(){
+				uni.navigateTo({
+				    url: '/pages/bsoftMedical/health/hypertensive-manage'
+				});
+			},
 		},
 		onReachBottom() {
 			if (this.loadingType == 'nomore') {
@@ -212,6 +222,7 @@
 				height: 284upx;
 				background: #fff;
 				padding: 30upx 24upx 0;
+				margin-bottom: 20upx;
 				position: relative;
 				.inner1{
 					display: flex;

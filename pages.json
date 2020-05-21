@@ -38,9 +38,41 @@
 			}
 		},
 		{
+			"path": "pages/bsoftMedical/health/notice-content",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"titleNView": false,
+					"animationType": "slide-in-right"
+				}	
+			}
+		},
+		{
+			"path": "pages/bsoftMedical/health/select-send",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"titleNView": false,
+					"animationType": "slide-in-right"
+				}	
+			}
+		},
+		{
 			"path": "pages/bsoftMedical/health/manage",
 			"style": {
 				"navigationBarTitleText": "随访管理"
+			}
+		},
+		{
+			"path": "pages/bsoftMedical/health/check-manage",
+			"style": {
+				"navigationBarTitleText": "随访记录"
+			}
+		},
+		{
+			"path": "pages/bsoftMedical/health/hypertensive-manage",
+			"style": {
+				"navigationBarTitleText": "高血压患者随访"
 			}
 		},
 		{

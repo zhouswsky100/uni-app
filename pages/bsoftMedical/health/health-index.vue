@@ -27,7 +27,7 @@
 					<image class="file" src="@/static/health/home_sickbed.png"></image>
 					<view class="contentTitle">家庭病床</view>
 				</view>
-				<view class="contentInner1">
+				<view class="contentInner1" @click="noticeInfo()">
 					<image class="file" src="@/static/health/inform.png"></image>
 					<view class="contentTitle">通知居民</view>
 				</view>
@@ -66,7 +66,12 @@
 				uni.navigateTo({
 				    url: '/pages/bsoftMedical/health/family-doc-index'
 				});
-			}
+			},
+			noticeInfo(){
+				uni.navigateTo({
+				    url: '/pages/bsoftMedical/health/dnotice'
+				});
+			},
 		}
 	} 
 </script>

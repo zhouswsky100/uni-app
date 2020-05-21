@@ -35,15 +35,15 @@
 		</view>
 		<view class="banner1">
 			<view class="titleBox">
-				<span>服务项目</span>
-				<div class="cBottom"></div>
+				<view class="span">服务项目</view>
+				<view class="cBottom"></view>
 			</view>
 			<view class="titleBox">
-				<span>计划随访时间</span>
-				<div class="cBox">
-					<div class="cTop"></div>
-					<div class="cBottom"></div>
-				</div>
+				<view class="span">计划随访时间</view>
+				<view>
+					<view class="cTop"></view>
+					<view class="cBottom"></view>
+				</view>
 			</view>
 		</view>
 		<view class="contentBox">
@@ -217,7 +217,7 @@ export default {
 			display: flex;
 			align-items: center;
 			margin-right: 60upx;
-			span{
+			.span{
 				color:#07103C;
 				font-size: 28upx;
 				margin-right: 13upx;

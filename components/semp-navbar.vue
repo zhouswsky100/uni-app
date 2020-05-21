@@ -24,6 +24,9 @@
 						<slot name="right"></slot>
 					</view>
 				</view>
+				<view class="searchBox" v-if="$slots.search">
+					<slot name="search"></slot>
+				</view>
 			</view>
 		</view>
 	</view>
@@ -106,6 +109,8 @@
 		align-items: center;
 		position: relative;		
 		box-sizing:content-box;
+		display: flex;
+		flex-direction: column;
 		 /* #ifndef H5 */
 		 // padding-top:var(--status-bar-height);
 		 /* #endif */
@@ -117,6 +122,15 @@
 			height: 88upx;			
 			width:100%;
 			flex-direction: row;
+			align-items: center;
+		}
+		.searchBox{
+			width:100%;
+			height: 98upx;
+			padding: 0 24upx;
+			background: #fff;
+			display: flex;
+			justify-content: center;
 			align-items: center;
 		}
 		.status_bar {
@@ -152,8 +166,8 @@
 		transition: all 0.6s;
 		margin-left:16upx;
 		.back{
-			color:#fff;
-			font-size:34upx;
+			
+			font-size:44upx;
 		}
 	}
 	.right-info {
@@ -162,11 +176,14 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		margin-right:16upx;
+		margin-right:22upx;
 		
 	}
 	.middle-info{
 		width:100%;
+		color: #000;
+		font-size: 32upx;
+		font-weight: 700;
 		.title{
 			height: 88upx;
 			font-size: 32upx;
