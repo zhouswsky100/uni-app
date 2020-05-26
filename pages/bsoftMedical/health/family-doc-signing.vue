@@ -3,65 +3,61 @@
 		<view :class="[isUnfold?'transCard messageCard':'messageCard']">
 			<view class="title">
 				<image src="@/static/health/doc_note.png"></image>
-				<span class="titleText">病人基本信息</span>
+				<view class="titleText">病人基本信息</view>
 				<view class="collapseBtn" v-if="isCollapse" @click="isUnfold = !isUnfold">
-					<span v-if="isUnfold">展开</span>
-					<span v-if="!isUnfold">收起</span>
+					<view v-if="isUnfold">展开</view>
+					<view v-if="!isUnfold">收起</view>
 					<image :class="[isUnfold?'':'transUnfold']" src="@/static/my/unfold.png"></image>
 				</view>
 			</view>
 			<view :class="[isUnfold?'content transCont':'content']">
-				<ul>
-					<li class="positionTag">
-						<span class="label">姓名</span>
-						<span class="context">王自健</span>
-						<span class="tips">健康档案</span>
-					</li>
-					<li class="positionTag">
-						<span class="label">性别</span>
-						<span class="context">男</span>
-						<span class="tips">随访记录</span>
-					</li>
-					<li>
-						<span class="label">年龄</span>
-						<span class="context">56</span>
-					</li>
-					<li>
-						<span class="label">电话</span>
-						<span class="context">13888888888</span>
-					</li>
-					<li>
-						<span class="label">地址</span>
-						<span class="context">广东省深圳市龙岗区园山街道荷坳社区长江埔路润竹园</span>
-					</li>
-					<li class="underlineTag">
-						<span class="label">签约机构</span>
-						<span class="context">景田社康中心</span>
-					</li>
-					<li>
-						<span class="label">签约团队</span>
-						<span class="context">陈永清家医团队</span>
-					</li>
-				</ul>
+				<view class="positionTag">
+					<view class="label">姓名</view>
+					<view class="context">王自健</view>
+					<view class="tips">健康档案</view>
+				</view>
+				<view class="positionTag">
+					<view class="label">性别</view>
+					<view class="context">男</view>
+					<view class="tips">随访记录</view>
+				</view>
+				<view>
+					<view class="label">年龄</view>
+					<view class="context">56</view>
+				</view>
+				<view>
+					<view class="label">电话</view>
+					<view class="context">13888888888</view>
+				</view>
+				<view>
+					<view class="label">地址</view>
+					<view class="context paddingTag">广东省深圳市龙岗区园山街道荷坳社区长江埔路润竹园</view>
+				</view>
+				<view class="underlineTag">
+					<view class="label">签约机构</view>
+					<view class="context">景田社康中心</view>
+				</view>
+				<view>
+					<view class="label">签约团队</view>
+					<view class="context">陈永清家医团队</view>
+				</view>
 			</view>
 			<view class="opButton" v-if="isShowButton">
-				<span class="refused">拒绝</span>
-				<span class="agree" @click="isShowButton = false,isCollapse = true">同意</span>
+				<view class="refused">拒绝</view>
+				<view class="agree" @click="isShowButton = false,isCollapse = true,isUnfold = true">同意</view>
 			</view>
 		</view>
 		<view class="docWrite" v-if="!isShowButton">
 			<view class="title">
 				<image src="@/static/health/doc_edit.png"></image>
-				<span class="titleText">医生填写</span>
+				<view class="titleText">医生填写</view>
 			</view>
-			<view class="peopleType">
-				<view class="uni-list-cell-left">
+			<view class="peopleType" @click="goNextPage">
+				<view class="text-left">
 					人群分类
 				</view>
-				<view class="uni-list-cell-db">
-					<picker @change="bindPickerChange" :value="index" :range="peopleData">
-						<view class="uni-input">{{peopleData[index]}}</view>
-					</picker>
+				<view class="text-right">
+					请选择
 				</view>
 				<image src="@/static/health/next.png"></image>
 			</view>
@@ -69,7 +65,7 @@
 				<image v-if="isShowCheck" src="@/static/health/checked.png" @click="isShowCheck=!isShowCheck"></image>
 				<view v-if="!isShowCheck" class="unCheck" @click="isShowCheck=!isShowCheck"></view>
 				<view class="link">
-					同意<span>《家庭医生服务协议》</span>
+					同意<text>《家庭医生服务协议》</text>
 				</view>
 			</view>
 			<view class="submitBtn">
@@ -95,6 +91,11 @@
 			bindPickerChange: function(e) {
 				this.index = e.target.value
 			},
+			goNextPage() {
+				uni.navigateTo({
+				  url: '/pages/bsoftMedical/health/crowd-classify'
+				})
+			}
 		}
 	}
 </script>
@@ -108,12 +109,6 @@
 		width: 100%;
 		padding: 20upx 24upx;
 		font-size: 36upx;
-		ul {
-			padding: 0 0;
-		}
-		li {
-			list-style: none;
-		}
 		.title {
 			display: flex;
 			padding: 23upx 25upx;
@@ -125,27 +120,29 @@
 			}
 			.titleText {
 				color: #223263;
-				width: 500upx;
+				width: 75%;
 				font-size: 34upx;
 			}
 		}
 		.messageCard.transCard {
-			height: 100upx;
+			height: 92upx;
 		}
 		.messageCard {
 			width: 100%;
 			border-radius: 20upx;
 			background-color: #ffffff;
 			overflow: hidden;
-			transition: height 0.5s linear;
+			// transition: height 0.5s linear;
 			.title {
 				.collapseBtn {
+					display: flex;
+					align-items: center;
 					font-size: 24upx;
 					color: #898894;
 					uni-image {
 						width: 22upx;
 						height: 13upx;
-						margin-left: 9upx;
+						margin-left: 12upx;
 						transition: all 0.2s;
 					}
 					.transUnfold {
@@ -160,15 +157,15 @@
 				border-top: 2upx solid #EBEBEB;
 				padding: 29upx 30upx;
 				font-size: 30upx;
-				li {
+				& > uni-view {
 					display: flex;
 					justify-content: flex-start;
 					padding: 16upx 0upx;
 				}
-				li:last-child {
+				& > uni-view:last-child {
 					padding: 0 0;
 				}
-				li.positionTag {
+				.positionTag {
 					position: relative;
 				}
 				.label {
@@ -176,6 +173,9 @@
 				}
 				.context {
 					color: #ACB3C5;
+				}
+				.paddingTag.context {
+					padding-left: 52upx;
 				}
 				.tips {
 					position: absolute;
@@ -199,7 +199,7 @@
 				border-top: 2upx solid #EBEBEB;
 				padding: 22upx 0upx; 
 				box-sizing: border-box;
-				span {
+				.refused,.agree {
 					display: inline-block;
 					width: 210upx;
 					height: 64upx;
@@ -229,11 +229,11 @@
 				line-height: 95upx;
 				padding: 0upx 30upx;
 				font-size: 30upx;
-				.uni-list-cell-left {
+				.text-left {
 					width: 25%;
 					color: #020221;
 				}
-				.uni-list-cell-db {
+				.text-right {
 					width: 75%;
 					text-align: right;
 					padding-right: 32upx ;
@@ -257,6 +257,7 @@
 					width: 32upx;
 					height: 32upx;
 					margin-right: 12upx;
+					margin-top: 4upx;
 					border: 2upx solid #ACB3C5;
 					box-sizing: border-box;
 					background-color: #FFFFFF;
@@ -265,9 +266,10 @@
 				uni-image {
 					width: 32upx;
 					height: 32upx;
+					margin-top: 4upx;
 					margin-right: 12upx;
 				}
-				span {
+				text {
 					color: #0084FD;
 				}
 			}

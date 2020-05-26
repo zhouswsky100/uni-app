@@ -1,61 +1,63 @@
 <template>
 	<view class="wrap">
-		<view class="tabBar">
-			<view :class="[tabTag == 0? 'tabTitle tab-active':'tabTitle']" @click="changeTab(0)">
-				<span :class="[tabTag == 0? 'tabUnderline':'']">未处理</span>
+		<view class="topBox">
+			<view class="tabBar">
+				<view :class="[tabTag == 0? 'tabTitle tab-active':'tabTitle']" @click="changeTab(0)">
+					<view :class="[tabTag == 0? 'tabUnderline':'']">建档申请</view>
+				</view>
+				<view :class="[tabTag == 1? 'tabTitle tab-active':'tabTitle']" @click="changeTab(1)">
+					<view :class="[tabTag == 1? 'tabUnderline':'']">家医签约</view>
+				</view>
+				<view :class="[tabTag == 2? 'tabTitle tab-active':'tabTitle']" @click="changeTab(2)">
+					<view :class="[tabTag == 2? 'tabUnderline':'']">家床申请</view>
+				</view>
 			</view>
-			<view :class="[tabTag == 1? 'tabTitle tab-active':'tabTitle']" @click="changeTab(1)">
-				<span :class="[tabTag == 1? 'tabUnderline':'']">已通过</span>
-			</view>
-			<view :class="[tabTag == 2? 'tabTitle tab-active':'tabTitle']" @click="changeTab(2)">
-				<span :class="[tabTag == 2? 'tabUnderline':'']">已拒绝</span>
+			<view class="statusBar">
+				<view :class="[statusTag == 0?'selected':'']" @click="changeStatus(0)">未处理</view>
+				<view :class="[statusTag == 1?'selected':'']" @click="changeStatus(1)">已通过</view>
+				<view :class="[statusTag == 2?'selected':'']" @click="changeStatus(2)">已拒绝</view>
 			</view>
 		</view>
 		<view class="tabContent">
-			<view class="untreated" v-if="tabTag == 0">
-				<view class="card" v-for="(item, index) in untreatedList">
+			<view>
+				<view class="card" v-for="(item, index) in listData" v-if="statusTag == 0">
 					<view class="top">
 						<image :src="item.iconSrc"></image>
 						<view>
-							<p class="title">{{item.applyName}}</p>
-							<p class="date">申请日期：{{item.date}}</p>
+							<view class="title">{{item.applyName}}</view>
+							<view class="date">申请日期：{{item.date}}</view>
 						</view>
-						<span class="status">{{item.statusName}}</span>
+						<text class="status">{{item.statusName}}</text>
 					</view>
 					<view class="bottom">
 						<view class="message">
-							<view><span class="label">姓名：</span><span>{{item.name}}</span></view>
-							<view><span class="label">年龄：</span><span>{{item.age}}</span></view>
-							<view><span class="label">电话：</span><span>{{item.phoneNum}}</span></view>
+							<view><text class="label">姓名：</text><text>{{item.name}}</text></view>
+							<view><text class="label">年龄：</text><text>{{item.age}}</text></view>
+							<view><text class="label">电话：</text><text>{{item.phoneNum}}</text></view>
 						</view>
-						<view class="opButton" @click="dealAudit(item.applyType)">处理</view>
+						<view class="opButton" @click="dealAudit(tabTag)">处理</view>
 					</view>
 				</view>
-			</view>
-			<view class="pass" v-if="tabTag == 1">
-				<view class="card" v-for="(item, index) in passList">
+				<view class="card" v-for="(item, index) in listData" v-if="statusTag != 0">
 					<view class="top">
 						<image :src="item.iconSrc"></image>
 						<view>
-							<p class="title">{{item.applyName}}</p>
-							<p class="date">申请日期：{{item.date}}</p>
+							<view class="title">{{item.applyName}}</view>
+							<view class="date">申请日期：{{item.date}}</view>
 						</view>
-						<span class="status">{{item.statusName}}</span>
+						<text class="status">{{item.statusName}}</text>
 					</view>
 					<view class="bottom">
 						<view class="message">
-							<view><span class="label">姓名：</span><span>{{item.name}}</span></view>
-							<view><span class="label">年龄：</span><span>{{item.age}}</span></view>
-							<view><span class="label">电话：</span><span>{{item.phoneNum}}</span></view>
+							<view><text class="label">姓名：</text><text>{{item.name}}</text></view>
+							<view><text class="label">年龄：</text><text>{{item.age}}</text></view>
+							<view><text class="label">电话：</text><text>{{item.phoneNum}}</text></view>
 						</view>
 						<view class="moreButton">
 							<image src="@/static/health/next.png"></image>
 						</view>
 					</view>
 				</view>
-			</view>
-			<view class="rejected" v-if="tabTag == 2">
-				33333
 			</view>
 		</view>
 	</view>
@@ -66,62 +68,417 @@
 		data() {
 			return {
 				tabTag: 0,
-				untreatedList: [
+				statusTag: 0,
+				listData: [],
+				applyData: [
 					{
-						applyType: '0',
 						applyName: '建档申请',
-						date: '2020-05-10',
+						iconSrc: '../../../static/health/apply_file.png',
+						date: '2020-05-17',
 						status: '0',
 						name: '王自健',
-						age: '46',
-						phone: '18176519981'
-					},
-					{
-						applyType: '1',
-						applyName: '家医签约',
-						date: '2020-05-08',
-						status: '0',
-						name: '王建宇',
 						age: '32',
-						phone: '18176519981'
+						phone: '18176511181'
 					},
 					{
-						applyType: '2',
-						applyName: '家床申请',
+						applyName: '建档申请',
+						iconSrc: '../../../static/health/apply_file.png',
+						date: '2020-05-17',
 						status: '0',
-						date: '2020-05-11',
-						name: '杨家磊',
+						name: '马继祖',
+						age: '55',
+						phone: '18176321181'
+					},
+					{
+						applyName: '建档申请',
+						iconSrc: '../../../static/health/apply_file.png',
+						date: '2020-05-17',
+						status: '0',
+						name: '朱希亮',
+						age: '44',
+						phone: '18176578581'
+					},
+					{
+						applyName: '建档申请',
+						iconSrc: '../../../static/health/apply_file.png',
+						date: '2020-04-11',
+						status: '0',
+						name: '梁春平',
+						age: '46',
+						phone: '18176517781'
+					},
+					{
+						applyName: '建档申请',
+						iconSrc: '../../../static/health/apply_file.png',
+						date: '2020-03-8',
+						status: '0',
+						name: '马宏宇',
+						age: '33',
+						phone: '18826519981'
+					},
+					{
+						applyName: '建档申请',
+						iconSrc: '../../../static/health/apply_file.png',
+						date: '2020-01-22',
+						status: '1',
+						name: '章汉夫',
+						age: '68',
+						phone: '18176519911'
+					},
+					{
+						applyName: '建档申请',
+						iconSrc: '../../../static/health/apply_file.png',
+						date: '2020-02-27',
+						status: '1',
+						name: '范长江',
 						age: '26',
-						phone: '18176519981'
+						phone: '18176510981'
+					},
+					{
+						applyName: '建档申请',
+						iconSrc: '../../../static/health/apply_file.png',
+						date: '2020-02-27',
+						status: '1',
+						name: '程孝先',
+						age: '33',
+						phone: '18171230981'
+					},
+					{
+						applyName: '建档申请',
+						iconSrc: '../../../static/health/apply_file.png',
+						date: '2020-02-27',
+						status: '1',
+						name: '林君雄',
+						age: '41',
+						phone: '18176321981'
+					},
+					{
+						applyName: '建档申请',
+						iconSrc: '../../../static/health/apply_file.png',
+						date: '2020-02-27',
+						status: '2',
+						name: '谭平山',
+						age: '31',
+						phone: '18176456981'
+					},
+					{
+						applyName: '建档申请',
+						iconSrc: '../../../static/health/apply_file.png',
+						date: '2020-02-27',
+						status: '2',
+						name: '李厚福',
+						age: '55',
+						phone: '13116456981'
+					},
+					{
+						applyName: '建档申请',
+						iconSrc: '../../../static/health/apply_file.png',
+						date: '2020-02-27',
+						status: '2',
+						name: '赵大华',
+						age: '49',
+						phone: '18716456981'
+					},
+					{
+						applyName: '建档申请',
+						iconSrc: '../../../static/health/apply_file.png',
+						date: '2020-02-27',
+						status: '2',
+						name: '罗元发',
+						age: '40',
+						phone: '18333456981'
+					},
+					{
+						applyName: '建档申请',
+						iconSrc: '../../../static/health/apply_file.png',
+						date: '2020-02-27',
+						status: '2',
+						name: '刘乃超',
+						age: '31',
+						phone: '18176456981'
+					},
+					{
+						applyName: '建档申请',
+						iconSrc: '../../../static/health/apply_file.png',
+						date: '2020-02-27',
+						status: '2',
+						name: '刘永生',
+						age: '44',
+						phone: '18176123981'
 					}
 				],
-				passList: [
+				docSignData: [
 					{
-						applyType: '0',
-						applyName: '建档申请',
-						date: '2020-04-10',
-						status: '2',
-						name: '王自健',
-						age: '46',
-						phone: '18176519981'
-					},
-					{
-						applyType: '1',
 						applyName: '家医签约',
-						date: '2020-03-08',
-						status: '2',
-						name: '杨家磊',
+						iconSrc: '../../../static/health/family_doctor.png',
+						date: '2020-05-17',
+						status: '0',
+						name: '王自健',
 						age: '32',
-						phone: '18176519981'
+						phone: '18176511181'
 					},
 					{
-						applyType: '2',
-						applyName: '家床申请',
-						status: '2',
-						date: '2020-01-11',
-						name: '王建宇',
+						applyName: '家医签约',
+						iconSrc: '../../../static/health/family_doctor.png',
+						date: '2020-05-17',
+						status: '0',
+						name: '马继祖',
+						age: '55',
+						phone: '18176321181'
+					},
+					{
+						applyName: '家医签约',
+						iconSrc: '../../../static/health/family_doctor.png',
+						date: '2020-05-17',
+						status: '0',
+						name: '朱希亮',
+						age: '44',
+						phone: '18176578581'
+					},
+					{
+						applyName: '家医签约',
+						iconSrc: '../../../static/health/family_doctor.png',
+						date: '2020-04-11',
+						status: '0',
+						name: '梁春平',
+						age: '46',
+						phone: '18176517781'
+					},
+					{
+						applyName: '家医签约',
+						iconSrc: '../../../static/health/family_doctor.png',
+						date: '2020-03-8',
+						status: '0',
+						name: '马宏宇',
+						age: '33',
+						phone: '18826519981'
+					},
+					{
+						applyName: '家医签约',
+						iconSrc: '../../../static/health/family_doctor.png',
+						date: '2020-01-22',
+						status: '1',
+						name: '章汉夫',
+						age: '68',
+						phone: '18176519911'
+					},
+					{
+						applyName: '家医签约',
+						iconSrc: '../../../static/health/family_doctor.png',
+						date: '2020-02-27',
+						status: '1',
+						name: '范长江',
 						age: '26',
-						phone: '18176519981'
+						phone: '18176510981'
+					},
+					{
+						applyName: '家医签约',
+						iconSrc: '../../../static/health/family_doctor.png',
+						date: '2020-02-27',
+						status: '1',
+						name: '程孝先',
+						age: '33',
+						phone: '18171230981'
+					},
+					{
+						applyName: '家医签约',
+						iconSrc: '../../../static/health/family_doctor.png',
+						date: '2020-02-27',
+						status: '1',
+						name: '林君雄',
+						age: '41',
+						phone: '18176321981'
+					},
+					{
+						applyName: '家医签约',
+						iconSrc: '../../../static/health/family_doctor.png',
+						date: '2020-02-27',
+						status: '2',
+						name: '谭平山',
+						age: '31',
+						phone: '18176456981'
+					},
+					{
+						applyName: '家医签约',
+						iconSrc: '../../../static/health/family_doctor.png',
+						date: '2020-02-27',
+						status: '2',
+						name: '李厚福',
+						age: '55',
+						phone: '13116456981'
+					},
+					{
+						applyName: '家医签约',
+						iconSrc: '../../../static/health/family_doctor.png',
+						date: '2020-02-27',
+						status: '2',
+						name: '赵大华',
+						age: '49',
+						phone: '18716456981'
+					},
+					{
+						applyName: '家医签约',
+						iconSrc: '../../../static/health/family_doctor.png',
+						date: '2020-02-27',
+						status: '2',
+						name: '罗元发',
+						age: '40',
+						phone: '18333456981'
+					},
+					{
+						applyName: '家医签约',
+						iconSrc: '../../../static/health/family_doctor.png',
+						date: '2020-02-27',
+						status: '2',
+						name: '刘乃超',
+						age: '31',
+						phone: '18176456981'
+					},
+					{
+						applyName: '家医签约',
+						iconSrc: '../../../static/health/family_doctor.png',
+						date: '2020-02-27',
+						status: '2',
+						name: '刘永生',
+						age: '44',
+						phone: '18176123981'
+					}
+				],
+				familyBedData:[
+					{
+						applyName: '家床申请',
+						iconSrc: '../../../static/health/home_sickbed2.png',
+						date: '2020-05-17',
+						status: '0',
+						name: '王自健',
+						age: '32',
+						phone: '18176511181'
+					},
+					{
+						applyName: '家床申请',
+						iconSrc: '../../../static/health/home_sickbed2.png',
+						date: '2020-05-17',
+						status: '0',
+						name: '马继祖',
+						age: '55',
+						phone: '18176321181'
+					},
+					{
+						applyName: '家床申请',
+						iconSrc: '../../../static/health/home_sickbed2.png',
+						date: '2020-05-17',
+						status: '0',
+						name: '朱希亮',
+						age: '44',
+						phone: '18176578581'
+					},
+					{
+						applyName: '家床申请',
+						iconSrc: '../../../static/health/home_sickbed2.png',
+						date: '2020-04-11',
+						status: '0',
+						name: '梁春平',
+						age: '46',
+						phone: '18176517781'
+					},
+					{
+						applyName: '家床申请',
+						iconSrc: '../../../static/health/home_sickbed2.png',
+						date: '2020-03-8',
+						status: '0',
+						name: '马宏宇',
+						age: '33',
+						phone: '18826519981'
+					},
+					{
+						applyName: '家床申请',
+						iconSrc: '../../../static/health/home_sickbed2.png',
+						date: '2020-01-22',
+						status: '1',
+						name: '章汉夫',
+						age: '68',
+						phone: '18176519911'
+					},
+					{
+						applyName: '家床申请',
+						iconSrc: '../../../static/health/home_sickbed2.png',
+						date: '2020-02-27',
+						status: '1',
+						name: '范长江',
+						age: '26',
+						phone: '18176510981'
+					},
+					{
+						applyName: '家床申请',
+						iconSrc: '../../../static/health/home_sickbed2.png',
+						date: '2020-02-27',
+						status: '1',
+						name: '程孝先',
+						age: '33',
+						phone: '18171230981'
+					},
+					{
+						applyName: '家床申请',
+						iconSrc: '../../../static/health/home_sickbed2.png',
+						date: '2020-02-27',
+						status: '1',
+						name: '林君雄',
+						age: '41',
+						phone: '18176321981'
+					},
+					{
+						applyName: '家床申请',
+						iconSrc: '../../../static/health/home_sickbed2.png',
+						date: '2020-02-27',
+						status: '2',
+						name: '谭平山',
+						age: '31',
+						phone: '18176456981'
+					},
+					{
+						applyName: '家床申请',
+						iconSrc: '../../../static/health/home_sickbed2.png',
+						date: '2020-02-27',
+						status: '2',
+						name: '李厚福',
+						age: '55',
+						phone: '13116456981'
+					},
+					{
+						applyName: '家床申请',
+						iconSrc: '../../../static/health/home_sickbed2.png',
+						date: '2020-02-27',
+						status: '2',
+						name: '赵大华',
+						age: '49',
+						phone: '18716456981'
+					},
+					{
+						applyName: '家床申请',
+						iconSrc: '../../../static/health/home_sickbed2.png',
+						date: '2020-02-27',
+						status: '2',
+						name: '罗元发',
+						age: '40',
+						phone: '18333456981'
+					},
+					{
+						applyName: '家床申请',
+						iconSrc: '../../../static/health/home_sickbed2.png',
+						date: '2020-02-27',
+						status: '2',
+						name: '刘乃超',
+						age: '31',
+						phone: '18176456981'
+					},
+					{
+						applyName: '家床申请',
+						iconSrc: '../../../static/health/home_sickbed2.png',
+						date: '2020-02-27',
+						status: '2',
+						name: '刘永生',
+						age: '44',
+						phone: '18176123981'
 					}
 				]
 			}
@@ -134,10 +491,13 @@
 				let _this = this
 				switch(_this.tabTag) {
 					case 0:
-					_this.dataProcessing(_this.untreatedList)
+					_this.dataProcessing(_this.applyData)
 					break;
 					case 1:
-					_this.dataProcessing(_this.passList)
+					_this.dataProcessing(_this.docSignData)
+					break;
+					case 2:
+					_this.dataProcessing(_this.familyBedData)
 					break;
 				}
 			},
@@ -146,51 +506,50 @@
 				_this.tabTag = tabNum
 				_this.initPage()
 			},
+			changeStatus(sNum) {
+				let _this = this
+				_this.statusTag = sNum
+				_this.initPage()
+			},
 			dataProcessing(data) {
 				let _this = this
+				let temp = []
 				data.map(item=>{
-					switch(item.applyType){
-						case '0':
-						item.iconSrc = '../../../static/health/apply_file.png'
-						break;
-						case '1':
-						item.iconSrc = '../../../static/health/family_doctor.png'
-						break;
-						case '2':
-						item.iconSrc = '../../../static/health/home_sickbed2.png'
-						break;
-					}
 					switch(item.status) {
 						case '0':
 						item.statusName = '未处理'
 						break;
 						case '1':
-						item.statusName = '已处理'
+						item.statusName = '已通过'
 						break;
 						case '2':
-						item.statusName = '已通过'
+						item.statusName = '已拒绝'
 						break;
 					}
 					item.phoneNum = item.phone.replace(
 						/(\w{2})\w*(\w{3})/,
 						'$1*******$2'
 					)
+					if(item.status == _this.statusTag) {
+						temp.push(item)
+					}
 					return data
 				})
+				_this.listData = temp
 			},
 			dealAudit(dealType) {
 				switch(dealType) {
-					case '0':
+					case 0:
 					uni.navigateTo({
 					    url: '/pages/bsoftMedical/health/archives-apply'
 					})
 					break;
-					case '1':
+					case 1:
 					uni.navigateTo({
 					    url: '/pages/bsoftMedical/health/family-doc-signing'
 					})
 					break;
-					case '2':
+					case 2:
 					uni.navigateTo({
 					    url: '/pages/bsoftMedical/health/family-bed'
 					})
@@ -209,6 +568,12 @@
 	.wrap{ 
 		width: 100%;
 		font-size: 36upx;
+		position: relative;
+		.topBox {
+			width: 100%;
+			position: fixed;
+			z-index: 999;
+		}
 		.tabBar {
 			display: flex;
 			justify-content: space-between;
@@ -220,7 +585,8 @@
 				text-align: center;
 				line-height: 100upx;
 				font-size: 30upx;
-				span.tabUnderline {
+				.tabUnderline {
+					display: inline;
 					border-bottom: 6upx solid #0084FD;
 					padding-bottom: 30upx;
 				}
@@ -229,8 +595,30 @@
 				color: #0084FD;
 			}
 		}
+		.statusBar {
+			display: flex;
+			width: 100%;
+			padding: 22upx 24upx;
+			background-color: #F8F9FF;
+			uni-view {
+				width: 116upx;
+				height: 50upx;
+				line-height: 50upx;
+				text-align: center;
+				background-color: #FFFFFF;
+				border-radius: 25upx;
+				font-size: 24upx;
+				color: #223263;
+				margin-right: 30upx;
+			}
+			uni-view.selected {
+				border:1px solid rgba(0,132,253,1);
+				background-color: #EEF7FF;
+				color: #0084FD;
+			}
+		}
 		.tabContent {
-			padding: 20upx 24upx;
+			padding: 194upx 24upx 0upx 24upx;
 			.card {
 				width: 100%;
 				height: 300upx;
@@ -250,7 +638,7 @@
 						height: 64upx;
 					}
 					uni-view {
-						width: 488upx;
+						width: 75%;
 					}
 					.title {
 						font-size: 30upx;
@@ -258,9 +646,10 @@
 						color: #283767;
 					}
 					.status {
-						width: 80upx;
+						width: 15%;
 						line-height: 66upx;
 						color: #0084FD;
+						text-align: right;
 					}
 				}
 				.bottom {
@@ -272,7 +661,7 @@
 						.label {
 							color: #9DA4BB;
 						}
-						span {
+						text {
 							line-height: 48upx;
 						}
 					}

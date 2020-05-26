@@ -34,8 +34,8 @@
 			</view>
 		</view>
 		<view class="banner1">
-			<view class="titleBox">
-				<view class="span">服务项目</view>
+			<view class="titleBox" @click="screen()">
+				<view class="span">{{projectName}}</view>
 				<view class="cBottom"></view>
 			</view>
 			<view class="titleBox">
@@ -47,7 +47,7 @@
 			</view>
 		</view>
 		<view class="contentBox">
-			<view class="inner1" v-for="(item,index) in itemList" :key="index">
+			<view class="inner1" v-for="(item,index) in showList" :key="index" >
 				<view class="p">{{item.title}}</view>
 				<view class="outer1">
 					<view class="detail">姓名：{{item.name}}</view>
@@ -63,22 +63,31 @@
 						<view>消息</view>
 					</view>
 				</view>
-				<button>处理</button>
+				<button @click="process(item)">处理</button>
+			</view>
+		</view>
+		<view v-if="screenShow" class="dialogBox">
+			<view class="dialog">
+				<view class="dialogList" v-for="(item,index) in projectList" :key="index" @click="checkProject(item)">{{item.name}}</view>
 			</view>
 		</view>
 	</view>
 </template>
 
 <script>
+import uniPopup from '@/components/uni-popup/uni-popup.vue'
 export default {
+	components: {uniPopup},
 	data() {
 		return {
+			projectName:'随访项目',
 			itemList:[
 				{
 					title:'糖尿病随访',
 					name:'王子建',
 					time:'2020-05-10',
 					phone:'13537758058',
+					type:'2',
 					id:0
 				},
 				{
@@ -86,13 +95,15 @@ export default {
 					name:'张伟',
 					time:'2020-05-10',
 					phone:'13537758058',
+					type:'1',
 					id:1
 				},
 				{
-					title:'孕产妇',
+					title:'老年人随访',
 					name:'王丽娟',
 					time:'2020-05-10',
 					phone:'13537758058',
+					type:'0',
 					id:2
 				},
 				{
@@ -100,12 +111,131 @@ export default {
 					name:'何自君',
 					time:'2020-05-10',
 					phone:'13537758058',
+					type:'3',
 					id:3
+				},
+				{
+					title:'糖尿病随访',
+					name:'刘子建',
+					time:'2020-05-09',
+					phone:'13537758123',
+					type:'2',
+					id:4
+				},
+				{
+					title:'高血压随访',
+					name:'范伟',
+					time:'2020-05-09',
+					phone:'13537743058',
+					type:'1',
+					id:5
+				},
+				{
+					title:'老年人随访',
+					name:'李丽娟',
+					time:'2020-05-09',
+					phone:'13537751258',
+					type:'0',
+					id:6
+				},
+				{
+					title:'中医体质辨识',
+					name:'杨自君',
+					time:'2020-05-09',
+					phone:'13537758238',
+					type:'3',
+					id:7
 				},
 				
 			],
+			showList:'',
+			projectId:'-1',
+			projectList:[
+				{
+					name:'默认',
+					id:'-1',
+					value:'随访项目'
+				},
+				{
+					name:'老年人',
+					id:'0',
+					value:'老年人'
+				},
+				{
+					name:'高血压',
+					id:'1',
+					value:'高血压'
+				},
+				{
+					name:'糖尿病',
+					id:'2',
+					value:'糖尿病'
+				},
+				{
+					name:'中医药',
+					id:'3',
+					value:'中医药'
+				},
+			],
+			screenShow:false,
 		}
 	},
+	methods:{
+		screen(){
+			this.screenShow=true;
+			//this.$refs.popup.open()
+		},
+		checkProject(obj){
+			this.screenShow=false;
+			this.projectName= obj.value;
+			if(obj.id=='-1'){
+				this.showList = this.itemList;
+			}else{
+				this.showList=[];
+				this.itemList.map((item)=>{
+					if(item.type==obj.id){
+						this.showList.push(item)
+					}
+				})
+			}
+		},
+		//跳转随访
+		process(obj){
+			let type = obj.type;
+			switch(type){
+				case '0':
+					//老年人
+					uni.showToast({
+					    title: '暂无开发',
+					    duration: 2000,
+						icon:'none',
+					});
+				break;
+				case '1':
+					//高血压
+					uni.navigateTo({
+					    url: '/pages/bsoftMedical/health/hypertensive-manage'
+					});
+				break;
+				case '2':
+					//糖尿病
+					uni.navigateTo({
+					    url: '/pages/bsoftMedical/health/diabetes-manage'
+					});
+				break;
+				case '3':
+					//中医药
+					uni.navigateTo({
+					    url: '/pages/bsoftMedical/health/medicine-manage?id='+obj.id
+					});
+				break;
+			}
+		}
+	},
+	onShow(){
+		this.showList = this.itemList;
+	},
+	
 }
 </script>
 
@@ -314,6 +444,27 @@ export default {
 				display: none;
 			}
 				
+		}
+	}
+	.dialogBox{
+		width: 100%;
+		
+		position: absolute;
+		left: 0;
+		top:421upx;
+		background: rgba($color: #000000, $alpha: .5);
+		height: calc(100% - 421upx);
+		z-index:66;
+		.dialog{
+			background: #fff;
+			.dialogList{
+				padding: 0 24upx;
+				height: 86upx;
+				border-bottom: 1upx solid #E9E9E9;
+				line-height: 86upx;
+				color: #020221;
+				font-size: 30upx;
+			}
 		}
 	}
 }

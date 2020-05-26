@@ -28,8 +28,8 @@
 					<view v-else class="unfold"></view>
 				</view>
 				<view class="listBox" v-if="classify">
-					<view class="list" v-for="(item,index) in classifyList" :key="index">
-						<view class="checkBox" @click="check(item)">
+					<view class="list" v-for="(item,index) in classifyList" :key="index" @click="check(item)">
+						<view class="checkBox">
 							<image v-if="item.type=='0'" class="listImg" src="@/static/health/unselected.png"></image>
 							<image v-else-if="item.type=='1'" class="listImg" src="@/static/health/selected.png"></image>
 							<image v-else class="listImg" src="@/static/health/not_opt.png"></image>
@@ -290,7 +290,7 @@ page{
 	}
 	.uni-input{
 		flex: 1;
-		padding-left: 15px;
+		padding-left: 15upx;
 		height: 64upx;
 		line-height: 64upx;
 		.uni-input-placeholder{

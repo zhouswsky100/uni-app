@@ -268,7 +268,7 @@
 					<uni-collapse-item title="用药情况" >
 						<view class="contentBox uni-list">
 							<view v-if="pharmacyList.length>0" class="pharmacyList"></view>
-							<view class="addBox">
+							<view class="addBox" @click="addPop">
 								<image class="add" src="@/static/health/addpharmacy.png"></image>添加
 							</view>
 						</view>
@@ -316,6 +316,27 @@
 			<view class="titleBox2">
 				<view class="btn">完成</view>
 			</view>
+			<uni-popup  ref="popup" type="bottom">
+				<view class="addPharmacy">
+					<view class="h2">用药情况</view>
+					<view class="pharmacyInput">
+						<input class="uni-input"  placeholder="药物名称" />
+					</view>
+					<view class="pharmacyInput">
+						<input class="uni-input"  placeholder="用药剂量" />
+					</view>
+					<view class="pharmacyInput">
+						<input class="uni-input"  placeholder="用药次数" />
+					</view>
+					<view class="pharmacyInput" style="margin-bottom: 92upx;">
+						<input class="uni-input"  placeholder="用药单位" />
+					</view>
+					<view class="addBtnBox">
+						<view class="addBtn1">继续添加</view>
+						<view class="addBtn2" @click="finishPharmacy">完成</view>
+					</view>
+				</view>
+			</uni-popup>
 		</view>
 	</view>
 </template>
@@ -323,14 +344,15 @@
 <script>
 import uniCollapse from '@/components/uni-collapse/uni-collapse.vue'
 import uniCollapseItem from '@/components/uni-collapse-item/uni-collapse-item.vue'
+import uniPopup from '@/components/uni-popup/uni-popup.vue'
 export default {
-    components: {uniCollapse,uniCollapseItem},
+    components: {uniCollapse,uniCollapseItem,uniPopup},
 	data(){
 		const currentDate = this.getDate({
 			format: true
 		})
 		return{
-			isStepone:false,
+			isStepone:true,
 			content:'无症状',
 			bloodCont:'收缩压:127/舒张压:87',
 			weightCont:'当前:22.86/目标:22.86',
@@ -578,6 +600,13 @@ export default {
 			month = month > 9 ? month : '0' + month;;
 			day = day > 9 ? day : '0' + day;
 			return `${year}-${month}-${day}`;
+		},
+		addPop(){
+			this.$refs.popup.open()
+		},
+		//关闭用药情况弹出层
+		finishPharmacy(){
+			this.$refs.popup.close()
 		}
 	}
 }
@@ -820,6 +849,65 @@ export default {
 			color: #fff;
 			font-size: 36upx;
 			line-height: 88upx;
+		}
+	}
+	.addPharmacy{
+		background:rgba(255,255,255,1);
+		border-radius:20upx 20upx 0upx 0upx;
+		width: 100%;
+		padding: 88upx 24upx 37upx;
+		.h2{
+			width: 100%;
+			color: #07103C;
+			font-size: 44upx;
+			margin-bottom: 30upx;
+			font-weight:bold;
+			
+		}
+		.pharmacyInput{
+			width: 100%;
+			height: 88upx;
+			background:rgba(242,243,245,1);
+			border-radius:10upx;
+			margin-bottom: 20upx;
+			.uni-input{
+				width: 100%;
+				padding-left: 30upx;
+				height: 88upx;
+				line-height: 88upx;
+				.uni-input-placeholder{
+				   color: #999999;
+				   font-size: 30upx;
+				}
+			}
+		}
+		.addBtnBox{
+			padding: 0 36upx;
+			width: 100%;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			.addBtn1{
+				width:300upx;
+				height:78upx;
+				background:rgba(250,250,250,1);
+				border:2upx solid rgba(235,235,235,1);
+				border-radius:39upx;
+				color: #31394C;
+				font-size: 36upx;
+				line-height: 78upx;
+				text-align: center;
+			}
+			.addBtn2{
+				width:300upx;
+				height:78upx;
+				background:rgba(0,132,253,1);
+				border-radius:39upx;
+				color: #fff;
+				font-size: 36upx;
+				line-height: 78upx;
+				text-align: center;
+			}
 		}
 	}
 }	

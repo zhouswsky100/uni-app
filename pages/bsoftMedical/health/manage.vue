@@ -1,6 +1,12 @@
 <template>
 	<view class="warp">
 		<view class="fixed">
+			<view class="searchBox">
+				<view class="searchBanner">
+					<image class="searchImg" src="@/static/health/search.png"></image>
+					<input class="uni-input"  placeholder="搜索" />
+				</view>
+			</view>
 			<view class="headerBox">
 				<view class="contentList" v-for="(item,index) in typeList" :key="index" @click="changeType(item.id)" :class="toggleId==item.id?'current':''">
 					{{item.title}}
@@ -9,7 +15,7 @@
 			</view>
 		</view>
 		<view class="content">
-			<view class="banner1" v-for="(item,index) in contentList" :key="index">
+			<view class="banner1" v-for="(item,index) in contentList" :key="index" v-if="toggleId==item.type">
 				<view class="inner1">
 					<view class="outer1">{{item.name}}</view>
 				</view>
@@ -22,9 +28,9 @@
 					<image class="outer4" src="@/static/health/date.png" ></image>
 					<view class="outer5">建档时间：2020-05-07</view>
 				</view>
-				<view class="nextBox" @click="goManage()">随访</view>
+				<view class="nextBox" @click="goManage(item)">随访</view>
 				<view class="contentFooter">
-					<view class="footerBox" @click="checkManage()">
+					<view class="footerBox" @click="checkManage(item.type)">
 						<view class="outer6">随访记录</view>
 						<view class="outer6 outer7">查看 <image class="outer8" src="@/static/health/next.png"></image></view>
 					</view>
@@ -53,12 +59,8 @@
 						id:'2',
 					},
 					{
-						title:'健康体检',
+						title:'中医药',
 						id:'3',
-					},
-					{
-						title:'孕产妇',
-						id:'4',
 					}
 				],
 				toggleId:'0',
@@ -70,6 +72,7 @@
 						male:'男',
 						phone:'18779868888',
 						time:'2020-05-07',
+						type:'0',
 						id:'0'
 					},
 					{
@@ -78,6 +81,7 @@
 						male:'男',
 						phone:'18779868888',
 						time:'2020-05-07',
+						type:'1',
 						id:'1'
 					},
 					{
@@ -86,6 +90,7 @@
 						male:'男',
 						phone:'18779868888',
 						time:'2020-05-07',
+						type:'2',
 						id:'2'
 					},
 					{
@@ -94,6 +99,7 @@
 						male:'女',
 						phone:'18779868888',
 						time:'2020-05-07',
+						type:'3',
 						id:'3'
 					},
 					{
@@ -102,6 +108,7 @@
 						male:'男',
 						phone:'18779868888',
 						time:'2020-05-07',
+						type:'2',
 						id:'4'
 					},
 					{
@@ -110,6 +117,7 @@
 						male:'男',
 						phone:'18779868888',
 						time:'2020-05-07',
+						type:'0',
 						id:'5'
 					},
 					{
@@ -118,6 +126,7 @@
 						male:'男',
 						phone:'18779868888',
 						time:'2020-05-07',
+						type:'1',
 						id:'6'
 					},
 					{
@@ -126,6 +135,7 @@
 						male:'男',
 						phone:'18779868888',
 						time:'2020-05-07',
+						type:'2',
 						id:'7'
 					},
 					{
@@ -134,6 +144,7 @@
 						male:'男',
 						phone:'18779868888',
 						time:'2020-05-07',
+						type:'3',
 						id:'8'
 					},
 					{
@@ -142,6 +153,7 @@
 						male:'男',
 						phone:'18779868888',
 						time:'2020-05-07',
+						type:'2',
 						id:'9'
 					},
 				],
@@ -159,10 +171,35 @@
 				    url: '/pages/bsoftMedical/health/check-manage'
 				});
 			},
-			goManage(){
-				uni.navigateTo({
-				    url: '/pages/bsoftMedical/health/hypertensive-manage'
-				});
+			goManage(obj){
+				switch(obj.type){
+					case '0':
+						//老年人
+						uni.showToast({
+						    title: '暂无开发',
+						    duration: 2000,
+							icon:'none',
+						});
+					break;
+					case '1':
+						//高血压
+						uni.navigateTo({
+						    url: '/pages/bsoftMedical/health/hypertensive-manage'
+						});
+					break;
+					case '2':
+						//糖尿病
+						uni.navigateTo({
+						    url: '/pages/bsoftMedical/health/diabetes-manage'
+						});
+					break;
+					case '3':
+						//中医药
+						uni.navigateTo({
+						    url: '/pages/bsoftMedical/health/medicine-manage?id='+obj.id
+						});
+					break;
+				}
 			},
 		},
 		onReachBottom() {
@@ -185,8 +222,37 @@
 			top: --window-top;
 			z-index: 2;
 			background: #fff;
-			overflow-y:hidden;  
-			overflow-x:scroll;  
+			.searchBox{
+				height: 98upx;
+				padding: 0 24upx;
+				background: #fff;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				.searchBanner{
+					height: 64upx;
+					width: 702upx;
+					background:rgba(236,237,239,1);
+					border-radius:32upx;
+					padding: 0 30upx;
+					display: flex;
+					align-items: center;
+					.searchImg{
+						width: 32upx;
+						height: 32upx;
+					}
+					.uni-input{
+						flex: 1;
+						padding-left: 15upx;
+						height: 64upx;
+						line-height: 64upx;
+						.uni-input-placeholder{
+						   color: #93989D;
+						   font-size: 28upx;
+						}
+					}
+				}
+			}
 			.headerBox{
 				display: flex;
 				height: 88upx;
@@ -217,7 +283,7 @@
 			}
 		}
 		.content{
-			padding-top: 88upx;
+			padding-top: 186upx;
 			.banner1{
 				height: 284upx;
 				background: #fff;

@@ -3,135 +3,211 @@
 		<view :class="[isUnfold?'transCard messageCard':'messageCard']">
 			<view class="title">
 				<image src="@/static/health/doc_note.png"></image>
-				<span class="titleText">病人基本信息</span>
+				<text class="titleText">病人基本信息</text>
 				<view class="collapseBtn" v-if="isCollapse" @click="isUnfold = !isUnfold">
-					<span v-if="isUnfold">展开</span>
-					<span v-if="!isUnfold">收起</span>
+					<view v-if="isUnfold">展开</view>
+					<view v-if="!isUnfold">收起</view>
 					<image :class="[isUnfold?'':'transUnfold']" src="@/static/my/unfold.png"></image>
 				</view>
 			</view>
 			<view :class="[isUnfold?'content transCont':'content']">
-				<ul>
-					<li class="positionTag">
-						<span class="label">姓名</span>
-						<span class="context">王自健</span>
-					</li>
-					<li class="positionTag">
-						<span class="label">性别</span>
-						<span class="context">男</span>
-					</li>
-					<li>
-						<span class="label">年龄</span>
-						<span class="context">56</span>
-					</li>
-					<li>
-						<span class="label">性质</span>
-						<span class="context">医疗保险</span>
-					</li>
-					<li>
-						<span class="label">医保卡号</span>
-						<span class="context">64589512546</span>
-					</li>
-					<li>
-						<span class="label">出生日期</span>
-						<span class="context">1976-12-03</span>
-					</li>
-					<li>
-						<span class="label">身份证</span>
-						<span class="context">321321197602568791</span>
-					</li>
-					<li>
-						<span class="label">地址</span>
-						<span class="context">广东省深圳市龙岗区园山街道荷坳社区长江埔路润竹园</span>
-					</li>
-					<li class="underlineTag">
-						<span class="label">联系人</span>
-						<span class="context">王自健</span>
-					</li>
-					<li>
-						<span class="label">与本人关系</span>
-						<span class="context">父子</span>
-					</li>
-					<li>
-						<span class="label">联系电话</span>
-						<span class="context">13566666666</span>
-					</li>
-				</ul>
+					<view>
+						<text class="label">姓名</text>
+						<text class="context">王自健</text>
+					</view>
+					<view>
+						<text class="label">本人电话</text>
+						<text class="context">13588888888</text>
+					</view>
+					<view>
+						<text class="label">户籍地址</text>
+						<text class="context">广东省深圳市</text>
+					</view>
+					<view>
+						<text class="label">地址</text>
+						<text class="context paddingTag">广东省深圳市龙岗区园山街道荷坳社区长江埔路润竹园</text>
+					</view>
+					<view class="underlineTag">
+						<text class="label">性别</text>
+						<text class="context">男</text>
+					</view>
+					<view>
+						<text class="label">出生日期</text>
+						<text class="context">1980-12-23</text>
+					</view>
+					<view>
+						<text class="label">证件类型</text>
+						<text class="context">身份证</text>
+					</view>
+					<view>
+						<text class="label">证件号码</text>
+						<text class="context">321321197602568791</text>
+					</view>
+					<view>
+						<text class="label">工作单位</text>
+						<text class="context">景田社康中心</text>
+					</view>
+					<view>
+						<text class="label">联系人姓名</text>
+						<text class="context">王子健</text>
+					</view>
+					<view>
+						<text class="label">联系人电话</text>
+						<text class="context">13566666666</text>
+					</view>
+					<view>
+						<text class="label">常驻类型</text>
+						<text class="context">户籍</text>
+					</view>
+					<view>
+						<text class="label">民族</text>
+						<text class="context">汉</text>
+					</view>
+					<view>
+						<text class="label">文化程度</text>
+						<text class="context">高中</text>
+					</view>
+					<view>
+						<text class="label">职业</text>
+						<text class="context">专业技术人员</text>
+					</view>
+					<view>
+						<text class="label">婚姻状况</text>
+						<text class="context">已婚</text>
+					</view>
+					<view>
+						<text class="label">费用支付</text>
+						<text class="context">全自费</text>
+					</view>
 			</view>
 			<view class="opButton" v-if="isShowButton">
-				<span class="refused">拒绝</span>
-				<span class="agree" @click="isShowButton = false,isCollapse = true">同意</span>
+				<text class="refused">拒绝</text>
+				<text class="agree" @click="isShowButton = false,isCollapse = true,isUnfold = true">同意</text>
 			</view>
 		</view>
 		<view class="docWrite" v-if="!isShowButton">
 			<view class="title">
 				<image src="@/static/health/doc_edit.png"></image>
-				<span class="titleText">医生填写</span>
+				<text class="titleText">医生填写</text>
 			</view>
-			<view class="writeContent">
-				<view class="selectItem">
-					<view class="uni-list-cell-left">
-						病种选择
-					</view>
-					<view class="uni-list-cell-db">
-						<picker @change="bindPickerChange" :value="index" :range="sickType">
-							<view class="uni-input">{{sickType[index]}}</view>
-						</picker>
-					</view>
-					<image src="@/static/health/next.png"></image>
+			<view class="formItemBox">
+				<view class="itemTitle">
+					<view class="itemLabel">药物过敏史</view>
+					<view :class="[formShow.isSelected1?'selectItem selected':'selectItem']" @click="changeSelectedStatus('1')">有</view>
+					<view :class="[formShow.isSelected2?'selectItem selected':'selectItem']" @click="changeSelectStatus('2')">无</view>
 				</view>
-				<view class="writeContext">
-					<view class="writeLabel">病情诊断</view>
-					<view class="uni-textarea">
-						<textarea placeholder-style="color:#B3B3B3" placeholder="请填写病情诊断"/>
-					</view>
-				</view>
-				<view class="writeContext">
-					<span class="writeLabel">病情摘要</span>
-					<view class="uni-textarea">
-						<textarea placeholder-style="color:#B3B3B3" placeholder="请填写病情摘要"/>
-					</view>
-				</view>
-				<view class="writeContext">
-					<span class="writeLabel">收治指征和建床意见</span>
-					<view class="uni-textarea">
-						<textarea placeholder-style="color:#B3B3B3" placeholder="请填写收治指征和建床意见"/>
-					</view>
+				<view class="itemContent">
+					
 				</view>
 			</view>
-			<view class="selectGroup">
-				<view class="selectItem">
-					<view class="uni-list-cell-left">
-						家床类型
-					</view>
-					<view class="uni-list-cell-db">
-						<picker @change="bindPickerChange" :value="index" :range="bedType">
-							<view class="uni-input">{{bedType[index]}}</view>
-						</picker>
-					</view>
-					<image src="@/static/health/next.png"></image>
+			<view class="formItemBox">
+				<view class="itemTitle">
+					<view class="itemLabel">暴露史</view>
+					<view :class="[formShow.isSelected3?'selectItem selected':'selectItem']" @click="changeSelectedStatus('3')">有</view>
+					<view :class="[formShow.isSelected4?'selectItem selected':'selectItem']" @click="changeSelectStatus('4')">无</view>
 				</view>
-				<view class="selectItem">
-					<view class="uni-list-cell-left">
-						开始日期
-					</view>
-					<view class="uni-list-cell-db">
-						<picker @change="bindPickerChange" :value="index" :range="startDate">
-							<view class="uni-input">{{startDate[index]}}</view>
-						</picker>
-					</view>
-					<image src="@/static/health/next.png"></image>
+				<view class="itemContent">
+					
 				</view>
-				<view class="selectItem borderTag">
-					<view class="uni-list-cell-left">
-						结束日期
-					</view>
-					<view class="uni-list-cell-db">
-						<picker @change="bindPickerChange" :value="index" :range="endDate">
-							<view class="uni-input">{{endDate[index]}}</view>
-						</picker>
-					</view>
-					<image src="@/static/health/next.png"></image>
+			</view>
+			<view class="formItemBox">
+				<view class="itemTitle">
+					<view class="itemLabel">既往史</view>
+					<view :class="[formShow.isSelected5?'selectItem selected':'selectItem']" @click="changeSelectedStatus('5')">有</view>
+					<view :class="[formShow.isSelected6?'selectItem selected':'selectItem']" @click="changeSelectStatus('6')">无</view>
+				</view>
+				<view class="itemContent">
+					
+				</view>
+			</view>
+			<view class="formItemBox">
+				<view class="itemTitle">
+					<view class="itemLabel">手术史</view>
+					<view :class="[formShow.isSelected7?'selectItem selected':'selectItem']" @click="changeSelectedStatus('7')">有</view>
+					<view :class="[formShow.isSelected8?'selectItem selected':'selectItem']" @click="changeSelectStatus('8')">无</view>
+				</view>
+				<view class="itemContent">
+					
+				</view>
+			</view>
+			<view class="formItemBox">
+				<view class="itemTitle">
+					<view class="itemLabel">外伤史</view>
+					<view :class="[formShow.isSelected9?'selectItem selected':'selectItem']" @click="changeSelectedStatus('9')">有</view>
+					<view :class="[formShow.isSelected10?'selectItem selected':'selectItem']" @click="changeSelectStatus('10')">无</view>
+				</view>
+				<view class="itemContent">
+					
+				</view>
+			</view>
+			<view class="formItemBox">
+				<view class="itemTitle">
+					<view class="itemLabel">输血史</view>
+					<view :class="[formShow.isSelected11?'selectItem selected':'selectItem']" @click="changeSelectedStatus('11')">有</view>
+					<view :class="[formShow.isSelected12?'selectItem selected':'selectItem']" @click="changeSelectStatus('12')">无</view>
+				</view>
+				<view class="itemContent">
+					
+				</view>
+			</view>
+			<view class="formItemBox">
+				<view class="itemTitle">
+					<view class="itemLabel">家族史|父亲</view>
+					<view :class="[formShow.isSelected13?'selectItem selected':'selectItem']" @click="changeSelectedStatus('13')">有</view>
+					<view :class="[formShow.isSelected14?'selectItem selected':'selectItem']" @click="changeSelectStatus('14')">无</view>
+				</view>
+				<view class="itemContent">
+					
+				</view>
+			</view>
+			<view class="formItemBox">
+				<view class="itemTitle">
+					<view class="itemLabel">家族史|母亲</view>
+					<view :class="[formShow.isSelected15?'selectItem selected':'selectItem']" @click="changeSelectedStatus('15')">有</view>
+					<view :class="[formShow.isSelected16?'selectItem selected':'selectItem']" @click="changeSelectStatus('16')">无</view>
+				</view>
+				<view class="itemContent">
+					
+				</view>
+			</view>
+			<view class="formItemBox">
+				<view class="itemTitle">
+					<view class="itemLabel">家族史|兄弟姐妹</view>
+					<view :class="[formShow.isSelected17?'selectItem selected':'selectItem']" @click="changeSelectedStatus('17')">有</view>
+					<view :class="[formShow.isSelected18?'selectItem selected':'selectItem']" @click="changeSelectStatus('18')">无</view>
+				</view>
+				<view class="itemContent">
+					
+				</view>
+			</view>
+			<view class="formItemBox">
+				<view class="itemTitle">
+					<view class="itemLabel">家族史|子女</view>
+					<view :class="[formShow.isSelected19?'selectItem selected':'selectItem']" @click="changeSelectedStatus('19')">有</view>
+					<view :class="[formShow.isSelected20?'selectItem selected':'selectItem']" @click="changeSelectStatus('20')">无</view>
+				</view>
+				<view class="itemContent">
+					
+				</view>
+			</view>
+			<view class="formItemBox">
+				<view class="itemTitle">
+					<view class="itemLabel">遗传病史</view>
+					<view :class="[formShow.isSelected21?'selectItem selected':'selectItem']" @click="changeSelectedStatus('21')">有</view>
+					<view :class="[formShow.isSelected22?'selectItem selected':'selectItem']" @click="changeSelectStatus('22')">无</view>
+				</view>
+				<view class="itemContent">
+					
+				</view>
+			</view>
+			<view class="formItemBox">
+				<view class="itemTitle">
+					<view class="itemLabel">残疾情况</view>
+					<view :class="[formShow.isSelected23?'selectItem selected':'selectItem']" @click="changeSelectedStatus('23')">有</view>
+					<view :class="[formShow.isSelected24?'selectItem selected':'selectItem']" @click="changeSelectStatus('24')">无</view>
+				</view>
+				<view class="itemContent">
+					
 				</view>
 			</view>
 			<view class="submitBtn">
@@ -149,17 +225,53 @@
 				isShowButton: true,
 				isUnfold: false,
 				isShowCheck: true,
-				sickType: ['请选择病种','癌症','肝功能障碍','新型肺炎'],
-				bedType: ['请选择','舒适','一般','差劲'],
-				startDate: ['请选择','2020-05-16','2020-05-17','2020-05-18'],
-				endDate: ['请选择','2020-05-17','2020-05-18','2020-05-19'],
-				index: 0
+				index: 0,
+				formShow: {
+					isSelected1: false,
+					isSelected2: false,
+					isSelected3: false,
+					isSelected4: false,
+					isSelected5: false,
+					isSelected6: false,
+					isSelected7: false,
+					isSelected8: false,
+					isSelected9: false,
+					isSelected10: false,
+					isSelected11: false,
+					isSelected12: false,
+					isSelected13: false,
+					isSelected14: false,
+					isSelected15: false,
+					isSelected16: false,
+					isSelected17: false,
+					isSelected18: false,
+					isSelected19: false,
+					isSelected20: false,
+					isSelected21: false,
+					isSelected22: false,
+					isSelected23: false,
+					isSelected24: false,
+				}
 			}
 		},
 		methods: {
 			bindPickerChange: function(e) {
 				this.index = e.target.value
 			},
+			changeSelectedStatus(item) {
+				this.formShow[`isSelected${item}`] = true
+				if(this.formShow[`isSelected${(parseInt(item)+1).toString()}`] == true) {
+					this.formShow[`isSelected${item}`] = true
+					this.formShow[`isSelected${(parseInt(item)+1).toString()}`] = false
+				}
+			},
+			changeSelectStatus(item) {
+				this.formShow[`isSelected${item}`] = true
+				if(this.formShow[`isSelected${item}`] == true) {
+					this.formShow[`isSelected${item}`] = true
+					this.formShow[`isSelected${(parseInt(item)-1).toString()}`] = false
+				}
+			}
 		}
 	}
 </script>
@@ -173,12 +285,6 @@
 		width: 100%;
 		padding: 20upx 24upx;
 		font-size: 36upx;
-		ul {
-			padding: 0 0;
-		}
-		li {
-			list-style: none;
-		}
 		.title {
 			display: flex;
 			padding: 23upx 25upx;
@@ -190,27 +296,29 @@
 			}
 			.titleText {
 				color: #223263;
-				width: 500upx;
+				width: 75%;
 				font-size: 34upx;
 			}
 		}
 		.messageCard.transCard {
-			height: 100upx;
+			height: 92upx;
 		}
 		.messageCard {
 			width: 100%;
 			border-radius: 20upx;
 			background-color: #ffffff;
 			overflow: hidden;
-			transition: height 0.5s linear;
+			// transition: height 0.5s linear;
 			.title {
 				.collapseBtn {
+					display: flex;
+					align-items: center;
 					font-size: 24upx;
 					color: #898894;
 					uni-image {
 						width: 22upx;
 						height: 13upx;
-						margin-left: 9upx;
+						margin-left: 12upx;
 						transition: all 0.2s;
 					}
 					.transUnfold {
@@ -225,22 +333,22 @@
 				border-top: 2upx solid #EBEBEB;
 				padding: 29upx 30upx;
 				font-size: 30upx;
-				li {
+				& > uni-view {
 					display: flex;
 					justify-content: flex-start;
 					padding: 16upx 0upx;
 				}
-				li:last-child {
+				& > uni-view:last-child {
 					padding: 0 0;
-				}
-				li.positionTag {
-					position: relative;
 				}
 				.label {
 					width: 185upx;
 				}
 				.context {
 					color: #ACB3C5;
+				}
+				.paddingTag.context {
+					padding-left: 68upx;
 				}
 				.underlineTag {
 					border-top: 2upx dashed #E3E7EC;
@@ -252,7 +360,7 @@
 				border-top: 2upx solid #EBEBEB;
 				padding: 22upx 0upx; 
 				box-sizing: border-box;
-				span {
+				text {
 					display: inline-block;
 					width: 210upx;
 					height: 64upx;
@@ -272,64 +380,35 @@
 		}
 		.docWrite {
 			margin-top: 71upx;
-			.selectItem {
-				display: flex;
-				position: relative;
-				width: 100%;
-				height: 95upx;
-				line-height: 95upx;
-				padding: 0upx 30upx;
-				font-size: 30upx;
-				border-bottom: 2upx solid  #F2F4F9;
-				.uni-list-cell-left {
-					width: 25%;
-					color: #020221;
-				}
-				.uni-list-cell-db {
-					width: 75%;
-					text-align: right;
-					padding-right: 32upx ;
-					color: #ACB3C5;
-				}
-				uni-image {
-					position: absolute;
-					width: 12upx;
-					height: 22upx;
-					right: 30upx;
-					top: 50%;
-					transform: translateY(-50%);
-				}
-			}
-			.selectItem.borderTag {
-				border: none;
-			}
-			.writeContent {
+			.formItemBox {
 				width: 100%;
 				border-radius: 20upx;
-				background-color: #ffffff;
-			}
-			.writeContext {
-				width: 100%;
-				padding: 34upx 20upx;
-				.writeLabel {
+				background-color: #FFFFFF;
+				margin-bottom: 20upx;
+				.itemTitle {
+					padding: 20upx;
+					display: flex;
+					color: #020221;
 					font-size: 30upx;
-					color: #020221;
+					line-height: 56upx;
+					.itemLabel {
+						min-width: 220upx;
+					}
+					.selectItem {
+						width: 124upx;
+						height: 60upx;
+						border-radius: 10upx;
+						background-color: #FAFAFA;
+						color: #666666;
+						text-align: center;
+						line-height: 60upx;
+						margin-right: 34upx;
+					}
+					.selectItem.selected {
+						background-color: #E8F2FA;
+						color: #0084FD;
+					}
 				}
-				uni-textarea {
-					margin-top: 34upx;
-					width: 100%;
-					height: 230upx;
-					padding: 24upx;
-					border-radius: 10upx;
-					background-color: #F2F3F5;
-					font-size: 28upx;
-				}
-			}
-			.selectGroup {
-				margin-top: 10upx;
-				width: 100%;
-				border-radius: 20upx;
-				background-color: #ffffff;
 			}
 			.submitBtn {
 				margin-top: 71upx;

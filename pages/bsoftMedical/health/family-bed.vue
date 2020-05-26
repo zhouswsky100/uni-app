@@ -3,70 +3,68 @@
 		<view :class="[isUnfold?'transCard messageCard':'messageCard']">
 			<view class="title">
 				<image src="@/static/health/doc_note.png"></image>
-				<span class="titleText">病人基本信息</span>
+				<view class="titleText">病人基本信息</view>
 				<view class="collapseBtn" v-if="isCollapse" @click="isUnfold = !isUnfold">
-					<span v-if="isUnfold">展开</span>
-					<span v-if="!isUnfold">收起</span>
+					<view v-if="isUnfold">展开</view>
+					<view v-if="!isUnfold">收起</view>
 					<image :class="[isUnfold?'':'transUnfold']" src="@/static/my/unfold.png"></image>
 				</view>
 			</view>
 			<view :class="[isUnfold?'content transCont':'content']">
-				<ul>
-					<li class="positionTag">
-						<span class="label">姓名</span>
-						<span class="context">王自健</span>
-					</li>
-					<li class="positionTag">
-						<span class="label">性别</span>
-						<span class="context">男</span>
-					</li>
-					<li>
-						<span class="label">年龄</span>
-						<span class="context">56</span>
-					</li>
-					<li>
-						<span class="label">性质</span>
-						<span class="context">医疗保险</span>
-					</li>
-					<li>
-						<span class="label">医保卡号</span>
-						<span class="context">64589512546</span>
-					</li>
-					<li>
-						<span class="label">出生日期</span>
-						<span class="context">1976-12-03</span>
-					</li>
-					<li>
-						<span class="label">身份证</span>
-						<span class="context">321321197602568791</span>
-					</li>
-					<li>
-						<span class="label">地址</span>
-						<span class="context">广东省深圳市龙岗区园山街道荷坳社区长江埔路润竹园</span>
-					</li>
-					<li class="underlineTag">
-						<span class="label">联系人</span>
-						<span class="context">王自健</span>
-					</li>
-					<li>
-						<span class="label">与本人关系</span>
-						<span class="context">父子</span>
-					</li>
-					<li>
-						<span class="label">联系电话</span>
-						<span class="context">13566666666</span>
-					</li>
-				</ul>
+					<view class="positionTag">
+						<text class="label">姓名</text>
+						<text class="context">王自健</text>
+					</view>
+					<view class="positionTag">
+						<text class="label">性别</text>
+						<text class="context">男</text>
+					</view>
+					<view>
+						<text class="label">年龄</text>
+						<text class="context">56</text>
+					</view>
+					<view>
+						<text class="label">性质</text>
+						<text class="context">医疗保险</text>
+					</view>
+					<view>
+						<text class="label">医保卡号</text>
+						<text class="context">64589512546</text>
+					</view>
+					<view>
+						<text class="label">出生日期</text>
+						<text class="context">1976-12-03</text>
+					</view>
+					<view>
+						<text class="label">身份证</text>
+						<text class="context">321321197602568791</text>
+					</view>
+					<view>
+						<text class="label">地址</text>
+						<text class="context paddingTag">广东省深圳市龙岗区园山街道荷坳社区长江埔路润竹园</text>
+					</view>
+					<view class="underlineTag">
+						<text class="label">联系人</text>
+						<text class="context">王自健</text>
+					</view>
+					<view>
+						<text class="label">与本人关系</text>
+						<text class="context">父子</text>
+					</view>
+					<view>
+						<text class="label">联系电话</text>
+						<text class="context">13566666666</text>
+					</view>
 			</view>
 			<view class="opButton" v-if="isShowButton">
-				<span class="refused">拒绝</span>
-				<span class="agree" @click="isShowButton = false,isCollapse = true">同意</span>
+				<text class="refused">拒绝</text>
+				<text class="agree" @click="isShowButton = false,isCollapse = true,isUnfold = true">同意</text>
 			</view>
 		</view>
 		<view class="docWrite" v-if="!isShowButton">
 			<view class="title">
 				<image src="@/static/health/doc_edit.png"></image>
-				<span class="titleText">医生填写</span>
+				<text class="titleText">医生填写</text>
 			</view>
 			<view class="writeContent">
 				<view class="selectItem">
@@ -87,13 +85,13 @@
 					</view>
 				</view>
 				<view class="writeContext">
-					<span class="writeLabel">病情摘要</span>
+					<text class="writeLabel">病情摘要</text>
 					<view class="uni-textarea">
 						<textarea placeholder-style="color:#B3B3B3" placeholder="请填写病情摘要"/>
 					</view>
 				</view>
 				<view class="writeContext">
-					<span class="writeLabel">收治指征和建床意见</span>
+					<text class="writeLabel">收治指征和建床意见</text>
 					<view class="uni-textarea">
 						<textarea placeholder-style="color:#B3B3B3" placeholder="请填写收治指征和建床意见"/>
 					</view>
@@ -176,12 +174,6 @@
 		width: 100%;
 		padding: 20upx 24upx;
 		font-size: 36upx;
-		ul {
-			padding: 0 0;
-		}
-		li {
-			list-style: none;
-		}
 		.title {
 			display: flex;
 			padding: 23upx 25upx;
@@ -193,27 +185,29 @@
 			}
 			.titleText {
 				color: #223263;
-				width: 500upx;
+				width: 75%;
 				font-size: 34upx;
 			}
 		}
 		.messageCard.transCard {
-			height: 100upx;
+			height: 92upx;
 		}
 		.messageCard {
 			width: 100%;
 			border-radius: 20upx;
 			background-color: #ffffff;
 			overflow: hidden;
-			transition: height 0.5s linear;
+			// transition: height 0.5s linear;
 			.title {
 				.collapseBtn {
+					display: flex;
+					align-items: center;
 					font-size: 24upx;
 					color: #898894;
 					uni-image {
 						width: 22upx;
 						height: 13upx;
-						margin-left: 9upx;
+						margin-left: 12upx;
 						transition: all 0.2s;
 					}
 					.transUnfold {
@@ -228,15 +222,15 @@
 				border-top: 2upx solid #EBEBEB;
 				padding: 29upx 30upx;
 				font-size: 30upx;
-				li {
+				& > uni-view {
 					display: flex;
 					justify-content: flex-start;
 					padding: 16upx 0upx;
 				}
-				li:last-child {
+				& > uni-view:last-child {
 					padding: 0 0;
 				}
-				li.positionTag {
+				.positionTag {
 					position: relative;
 				}
 				.label {
@@ -244,6 +238,9 @@
 				}
 				.context {
 					color: #ACB3C5;
+				}
+				.paddingTag.context {
+					padding-left: 68upx;
 				}
 				.underlineTag {
 					border-top: 2upx dashed #E3E7EC;
@@ -255,7 +252,7 @@
 				border-top: 2upx solid #EBEBEB;
 				padding: 22upx 0upx; 
 				box-sizing: border-box;
-				span {
+				text {
 					display: inline-block;
 					width: 210upx;
 					height: 64upx;

@@ -2,47 +2,47 @@
 	<view class="warp">
 		<view class="title">选择类型</view>
 		<view class="contentBox">
-			<view class="banner">
+			<view class="banner" @click="noticeContent(1)">
 				<view class="imageBox">
 					<image style="width:47upx ;height: 41upx;" src="@/static/health/announce.png"></image>
 				</view>
 				<view class="inner1">公告</view>
 				<view class="inner2">自定义</view>
 			</view>
-			<view class="banner">
+			<view class="banner" @click="noticeContent(2)">
 				<view class="imageBox">
 					<image style="width:44upx ;height: 40upx;" src="@/static/health/community_health_inform.png"></image>
 				</view>
 				<view class="inner1">社康通知</view>
-				<view class="inner2">模块</view>
+				<view class="inner2">模板</view>
 			</view>
-			<view class="banner">
+			<view class="banner" @click="noticeContent(3)">
 				<view class="imageBox">
 					<image style="width:40upx ;height: 41upx;" src="@/static/health/stop_clinic.png"></image>
 				</view>
 				<view class="inner1">停诊公告</view>
-				<view class="inner2">模块</view>
+				<view class="inner2">模板</view>
 			</view>
-			<view class="banner" @click="noticeContent(1)">
+			<view class="banner" @click="noticeContent(4)">
 				<view class="imageBox">
 					<image style="width:43upx ;height: 41upx;" src="@/static/health/health_followup.png"></image>
 				</view>
 				<view class="inner1">健康随访</view>
-				<view class="inner2">模块</view>
+				<view class="inner2">模板</view>
 			</view>
-			<view class="banner">
+			<view class="banner" @click="noticeContent(5)">
 				<view class="imageBox">
 					<image style="width:47upx ;height: 38upx;" src="@/static/health/health_education.png"></image>
 				</view>
 				<view class="inner1">健康教育</view>
-				<view class="inner2">模块</view>
+				<view class="inner2">模板</view>
 			</view>
-			<view class="banner">
+			<view class="banner" @click="noticeContent(6)">
 				<view class="imageBox">
 					<image style="width:41upx ;height:40upx;" src="@/static/health/questionnaire.png"></image>
 				</view>
 				<view class="inner1">问卷调查</view>
-				<view class="inner2">模块</view>
+				<view class="inner2">模板</view>
 			</view>
 		</view>
 	</view>
@@ -52,9 +52,16 @@
 	export default{
 		methods:{
 			noticeContent(id){
+				if(id=='5' || id=="6"){
+					uni.showToast({
+					    title: '暂无实现功能',
+					    duration: 2000,
+						icon:'none',
+					});
+					return;
+				}
 				uni.navigateTo({
 				    url: '/pages/bsoftMedical/health/notice-content?type='+id,
-					
 				});
 			}
 		}

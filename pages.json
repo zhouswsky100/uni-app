@@ -76,17 +76,57 @@
 			}
 		},
 		{
+			"path": "pages/bsoftMedical/health/diabetes-manage",
+			"style": {
+				"navigationBarTitleText": "糖尿病患者随访"
+			}
+		},
+		{
+			"path": "pages/bsoftMedical/health/medicine-manage",//中医药
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"titleNView": false,
+					"animationType": "slide-in-right"
+				}	
+			}
+		},
+		{
+			"path": "pages/bsoftMedical/health/identify-manage",
+			"style": {
+				"navigationBarTitleText": "中医体质辨识"
+			}
+		},
+		{
+			"path": "pages/bsoftMedical/health/question-manage",
+			"style": {
+				"navigationBarTitleText": "问卷"
+			}
+		},
+		{
 		   "path": "pages/bsoftMedical/health/family-bed",
 		   "style": {
-		    "navigationBarTitleText": "家庭病床"    
+			"navigationBarTitleText": "家庭病床"    
 		   }
-		  },
-		  {
+		},
+		{
 		   "path": "pages/bsoftMedical/health/archives-apply",
 		   "style": {
 		    "navigationBarTitleText": "档案申请"    
 		   }
-		  },
+		},
+		{
+		     "path": "pages/bsoftMedical/health/crowd-classify",
+		     "style": {
+		      "navigationBarTitleText": "人群分类"    
+		     }
+		},
+		{
+		     "path": "pages/bsoftMedical/health/add-group",
+		     "style": {
+		      "navigationBarTitleText": "添加群组"    
+		     }
+		},
 		{
 			"path": "pages/bsoftMedical/dwellings/dwellings-index",
 			"style": {
