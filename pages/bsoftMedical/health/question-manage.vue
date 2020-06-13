@@ -1,28 +1,41 @@
 <template>
-	<view class="warp">
-		 <view class="progress-box banner1">
-			<progress class="progress" active active-mode="forwards" :percent="progressValue" border-radius="7" backgroundColor="#F1F1F1" activeColor="#0084FD"/>
-			<view class="inner1"><view class="outer1">{{current}}</view>/{{questionTotal}}</view>
-		</view>
-		<view class="content">
-			<view class="inner2" v-for="(item,index) in questionList" :key="index" v-if="item.id==current">
-				<view class="title">{{index+1}}.{{item.title}}</view>
-				<view class="outer2" v-for="(i,k) in item.optionList" :key="k"  @click="checkOption(item,i)">
-					<view>({{k+1}})&nbsp;&nbsp;{{i.optionTitle}}</view>
-					<image v-if="i.optionChecked==true" class="checkQuestion" src="@/static/health/mchoose.png"></image>
+	<view>
+		<semp-navbar :back="true" btnFlag='true' navBg="#fff">
+			<view slot="default">
+				问卷
+			</view>
+		</semp-navbar>
+		<view class="warp">
+			
+			 <view class="progress-box banner1">
+				<progress class="progress" active active-mode="forwards" :percent="progressValue" border-radius="7" backgroundColor="#F1F1F1" activeColor="#0084FD"/>
+				<view class="inner1"><view class="outer1">{{current}}</view>/{{questionTotal}}</view>
+			</view>
+			<view class="content">
+				<view class="inner2" v-for="(item,index) in questionList" :key="index" v-if="item.id==current">
+					<view class="title">{{index+1}}.{{item.title}}</view>
+					<view class="outer2" v-for="(i,k) in item.optionList" :key="k"  @click="checkOption(item,i)">
+						<view>({{k+1}})&nbsp;&nbsp;{{i.optionTitle}}</view>
+						<image v-if="i.optionChecked==true" class="checkQuestion" src="@/static/health/mchoose.png"></image>
+					</view>
 				</view>
 			</view>
-		</view>
-		<view class="fixed">
-			<view class="onTopic" @click="goUp">上一题</view>
-			<view v-if="current!=questionTotal" class="onTopic2" @click="goDown">下一题</view>
-			<view v-else class="onTopic2" @click="goDown">完成</view>
+			<view class="fixed">
+				<view class="onTopic" @click="goUp">上一题</view>
+				<view v-if="current!=questionTotal" class="onTopic2" @click="goDown">下一题</view>
+				<view v-else class="onTopic2" @click="goDown">完成</view>
+			</view>
 		</view>
 	</view>
+	
 </template>
 
 <script>
-export default{
+import sempNavbar from "@/components/semp-navbar.vue";
+export default {
+	components: {
+		sempNavbar
+	},
 	data(){
 		return{
 			listId:'',
@@ -479,8 +492,11 @@ export default{
 					        console.log('success');
 					    }
 					});
-					uni.redirectTo({
-					     url: '/pages/bsoftMedical/health/medicine-manage'
+					// uni.redirectTo({
+					//      url: '/pages/bsoftMedical/health/medicine-manage'
+					// });
+					uni.navigateBack({
+					    delta: 2
 					});
 				}
 			}else{
@@ -495,22 +511,6 @@ export default{
 		this.questionTotal = this.questionList.length;
 		let arr = Array.from(new Array(this.questionTotal).keys()).fill('no');
 		this.checkList = arr;
-	},
-	onBackPress(option){
-		uni.showModal({
-		    title: '退出答题',
-		    content: '退出后，下次进入需重新开始做题哦',
-		    success: function (res) {
-		        if (res.confirm) {
-		            uni.redirectTo({
-		                 url: '/pages/bsoftMedical/health/identify-manage'
-		            });
-					// uni.navigateBack();
-		        } else if (res.cancel) {
-		        }
-		    }
-		});
-		return true
 	}
 }
 </script>
@@ -525,7 +525,7 @@ page{
 	height: 100%;
 	position: relative;
 	.banner1{
-		margin: 60upx 0 50upx;
+		margin: 148upx 0 50upx;
 		padding: 0 24upx;
 		display: flex;
 		align-items: center;

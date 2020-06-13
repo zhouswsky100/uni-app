@@ -6,7 +6,7 @@
 					人群分类
 				</view>
 				<view class="tagItemBox">
-					<view class="tagItem" v-for="(item,index) in clssifyData">{{item}}</view>
+					<view class="tagItem" v-for="(item,index) in clssifyData" :class="{current:item.type=='1'}" :key="index" @click="selectClssify(item)">{{item.title}}</view>
 				</view>
 			</view>
 			<view class="group">
@@ -14,7 +14,7 @@
 					自定义群组
 				</view>
 				<view class="tagItemBox">
-					<view class="tagItem" v-for="(item,index) in groupData">{{item}}</view>
+					<view class="tagItem" v-for="(item,index) in groupData" :class="{current:item.type=='1'}" :key="index" @click="selectClssify(item)">{{item.title}}</view>
 					<view class="tagItem addBtn">
 						<image src="@/static/juming/adds.png"></image>
 						<view @click="addGroup">添加</view>
@@ -24,7 +24,7 @@
 		</view>
 		<view class="bottomBar">
 			<view class="resetBtn">重置</view>
-			<view class="submitBtn">確定</view>
+			<view class="submitBtn">确定</view>
 		</view>
 	</view>
 </template>
@@ -33,8 +33,66 @@
 	export default {
 		data() {
 			return {
-				clssifyData: ['大于或等于65岁老人','高血压人群','孕产妇','重性精神病患者','肺结核患者','残疾人群','计生特殊家庭','0-6岁儿童','0-6岁儿童','0-6岁儿童','非重点人群','纳入计划生育家庭特别扶助制度重点项目'],
-				groupData: ['积极活跃', '依从性低']
+				clssifyData: [
+					{
+						title:'非重点人群',
+						type:0,//0是未选中1是选中
+					},
+					{
+						title:'大于或等于65岁老人',
+						type:0,//0是未选中1是选中
+					},
+					{
+						title:'高血压人群',
+						type:0,//0是未选中1是选中
+					},
+					{
+						title:'糖尿病人群',
+						type:0,//0是未选中1是选中
+					},
+					{
+						title:'重性精神病患者',
+						type:0,//0是未选中1是选中
+					},
+					{
+						title:'肺结核患者',
+						type:0,//0是未选中1是选中
+					},
+					{
+						title:'孕产妇',
+						type:0,//0是未选中1是选中
+					},
+					{
+						title:'0-6岁儿童',
+						type:0,//0是未选中1是选中
+					},
+					{
+						title:'残疾人群',
+						type:0,//0是未选中1是选中
+					},
+					{
+						title:'计生特殊家庭',
+						type:0,//0是未选中1是选中
+					},
+					{
+						title:'城乡低保五保',
+						type:0,//0是未选中1是选中
+					},
+					{
+						title:'纳入计划生育家庭特别扶助制度的独生子女伤残或死亡家庭的夫妻',
+						type:0,//0是未选中1是选中
+					},
+				],
+				groupData: [
+					{
+						title:'积极活跃',
+						type:0,//0是未选中1是选中
+					},
+					{
+						title:'依从性低',
+						type:0,//0是未选中1是选中
+					},
+				],
 			}
 		},
 		onLoad() {
@@ -50,6 +108,14 @@
 				uni.navigateTo({
 				    url: '/pages/bsoftMedical/health/add-group'
 				})
+			},
+			selectClssify(obj){
+				if(obj.type=='0'){
+					obj.type=1;
+				}else if(obj.type=='1'){
+					obj.type=0;
+				}
+				
 			}
 		}
 	}
@@ -79,11 +145,19 @@
 				background-color: #FAFAFA;
 				border-radius: 36upx;
 				text-align: center;
+				max-width: 470upx;
 				color: #07103C;
 				font-size: 26upx;
 				margin-bottom: 30upx;
 				margin-right: 20upx;
 				box-sizing: border-box;
+				overflow: hidden;/*超出部分隐藏*/
+				white-space: nowrap;/*不换行*/
+				text-overflow:ellipsis;/*超出部分文字以...显示*/
+				&.current{
+					color: #0084FD;
+					background-color: #F9FCFF;
+				}
 			}
 		}
 		.group {

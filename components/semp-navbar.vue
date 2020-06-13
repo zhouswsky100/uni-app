@@ -11,7 +11,7 @@
 				 <!-- #endif-->
 				<view class="nav-content">
 					<view class="left-info" v-if="back || $slots.left">
-						<view class="back cuIcon-back" v-if="back" @click="onBackPage"></view>
+						<view class="back cuIcon-back" v-if="back" @click="onBackPage(btnFlag)"></view>
 						<slot name="left"></slot>
 					</view>
 					<view class="middle-info" v-if="navTitle || $slots.default">
@@ -26,6 +26,9 @@
 				</view>
 				<view class="searchBox" v-if="$slots.search">
 					<slot name="search"></slot>
+				</view>
+				<view class="searchBox2" v-if="$slots.search2">
+					<slot name="search2"></slot>
 				</view>
 			</view>
 		</view>
@@ -67,7 +70,12 @@
 			transparentFontColor:{
 				type: String,
 				default: "#fff"
-			}
+			},
+			//是否给返回按钮加一个判断
+			btnFlag:{
+				type: String,
+				default: ''
+			},
 		},
 		data() {
 			return {				
@@ -78,8 +86,24 @@
 		// 	this.statusBarHeight = uni.getSystemInfoSync()['statusBarHeight'];
 		// },
 		methods:{
-			onBackPage() {
-				uni.navigateBack();
+			onBackPage(flag) {
+				if(flag=='true'){
+					uni.showModal({
+					    title: '退出答题',
+					    content: '退出后，下次进入需重新开始做题哦',
+					    success: function (res) {
+					        if (res.confirm) {
+					            uni.navigateBack();
+								// uni.navigateBack();
+					        } else if (res.cancel) {
+					        }
+					    }
+					});
+				}else{
+					console.log("返回")
+					uni.navigateBack();
+				}
+				
 			},
 		},
 		computed: {
@@ -132,6 +156,10 @@
 			display: flex;
 			justify-content: center;
 			align-items: center;
+		}
+		.searchBox2{
+			width:100%;
+			background: #fff;
 		}
 		.status_bar {
 		    height: var(--status-bar-height);		

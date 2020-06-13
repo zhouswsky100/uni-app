@@ -88,7 +88,11 @@ export default{
 	},
 	methods:{
 		goDetail(){
-			console.log("详情");
+			uni.showToast({
+			    title: '功能完善中',
+			    duration: 2000,
+				icon:'none',
+			});
 		}
 	}
 }

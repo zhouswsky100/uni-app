@@ -80,9 +80,11 @@
 			padding: 0 25upx;
 			background: #fff;
 			.uni-input{
-			   height: 100%;
+			   height: 108upx;
 			   border:0;
 			   .uni-input-placeholder{
+				   height: 108upx;
+				   line-height: 108upx;
 				   color: #CBCFD7;
 				   font-size: 32upx;
 			   }

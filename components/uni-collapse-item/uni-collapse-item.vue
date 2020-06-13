@@ -7,6 +7,7 @@
 				<text>{{ title }}</text><text class="keypointClass" :class="{'keypointClass2':keyPoint===true}">*</text>
 			</text>
 			<text class="uni-collapse-cell__title-text"><text class="content">{{content}}</text></text>
+			<text v-if="point" class="uni-collapse-cell__title-text"><text class="point">{{point}}</text></text>
 			<!-- #ifdef MP-ALIPAY -->
 			<view :class="{ 'uni-collapse-cell__title-arrow-active': isOpen, 'uni-collapse-cell--animation': showAnimation === true }"
 			 class="uni-collapse-cell__title-arrow">
@@ -43,6 +44,11 @@
 				// 列表标题
 				type: String,
 				default: ''
+			},
+			point: {
+				// 列表标题
+				type: Number,
+				default: 0
 			},
 			keyPoint: {
 				// 列表标题
@@ -220,6 +226,13 @@
 			font-size: 24upx;
 			display: flex;
 			justify-content: flex-start;
+		}
+		.point{
+			width: 100%;
+			color: #0084FD;
+			font-size: 30upx;
+			display: flex;
+			justify-content: flex-end;
 		}
 		.keypointClass{
 			color: #fff;

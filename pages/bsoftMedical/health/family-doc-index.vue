@@ -2,7 +2,7 @@
 	<view class="wrap">
 		<view class="topBox">
 			<view class="tabBar">
-				<view :class="[tabTag == 0? 'tabTitle tab-active':'tabTitle']" @click="changeTab(0)">
+				<view :class="[tabTag == 0? 'tabTitle tab-active':'tabTitle']" @click="filing">
 					<view :class="[tabTag == 0? 'tabUnderline':'']">建档申请</view>
 				</view>
 				<view :class="[tabTag == 1? 'tabTitle tab-active':'tabTitle']" @click="changeTab(1)">
@@ -20,38 +20,38 @@
 		</view>
 		<view class="tabContent">
 			<view>
-				<view class="card" v-for="(item, index) in listData" v-if="statusTag == 0">
+				<view class="card" v-for="(item, index) in listData" :key="index" v-if="statusTag == 0">
 					<view class="top">
 						<image :src="item.iconSrc"></image>
 						<view>
 							<view class="title">{{item.applyName}}</view>
-							<view class="date">申请日期：{{item.date}}</view>
+							<view class="date">申请日期：{{item.applyDate}}</view>
 						</view>
 						<text class="status">{{item.statusName}}</text>
 					</view>
 					<view class="bottom">
 						<view class="message">
-							<view><text class="label">姓名：</text><text>{{item.name}}</text></view>
+							<view><text class="label">姓名：</text><text>{{item.pname}}</text></view>
 							<view><text class="label">年龄：</text><text>{{item.age}}</text></view>
-							<view><text class="label">电话：</text><text>{{item.phoneNum}}</text></view>
+							<view><text class="label">电话：</text><text>{{item.mobile}}</text></view>
 						</view>
-						<view class="opButton" @click="dealAudit(tabTag)">处理</view>
+						<view class="opButton" @click="dealAudit(item,tabTag)">处理</view>
 					</view>
 				</view>
-				<view class="card" v-for="(item, index) in listData" v-if="statusTag != 0">
+				<view class="card" v-for="(item, index) in listData" :key="index" v-if="statusTag != 0">
 					<view class="top">
 						<image :src="item.iconSrc"></image>
 						<view>
 							<view class="title">{{item.applyName}}</view>
-							<view class="date">申请日期：{{item.date}}</view>
+							<view class="date">申请日期：{{item.applyDate}}</view>
 						</view>
 						<text class="status">{{item.statusName}}</text>
 					</view>
 					<view class="bottom">
 						<view class="message">
-							<view><text class="label">姓名：</text><text>{{item.name}}</text></view>
+							<view><text class="label">姓名：</text><text>{{item.pname}}</text></view>
 							<view><text class="label">年龄：</text><text>{{item.age}}</text></view>
-							<view><text class="label">电话：</text><text>{{item.phoneNum}}</text></view>
+							<view><text class="label">电话：</text><text>{{item.mobile}}</text></view>
 						</view>
 						<view class="moreButton">
 							<image src="@/static/health/next.png"></image>
@@ -69,430 +69,308 @@
 			return {
 				tabTag: 0,
 				statusTag: 0,
+				isType:'1',
+				isFiling:true,
 				listData: [],
-				applyData: [
-					{
-						applyName: '建档申请',
-						iconSrc: '../../../static/health/apply_file.png',
-						date: '2020-05-17',
-						status: '0',
-						name: '王自健',
-						age: '32',
-						phone: '18176511181'
-					},
-					{
-						applyName: '建档申请',
-						iconSrc: '../../../static/health/apply_file.png',
-						date: '2020-05-17',
-						status: '0',
-						name: '马继祖',
-						age: '55',
-						phone: '18176321181'
-					},
-					{
-						applyName: '建档申请',
-						iconSrc: '../../../static/health/apply_file.png',
-						date: '2020-05-17',
-						status: '0',
-						name: '朱希亮',
-						age: '44',
-						phone: '18176578581'
-					},
-					{
-						applyName: '建档申请',
-						iconSrc: '../../../static/health/apply_file.png',
-						date: '2020-04-11',
-						status: '0',
-						name: '梁春平',
-						age: '46',
-						phone: '18176517781'
-					},
-					{
-						applyName: '建档申请',
-						iconSrc: '../../../static/health/apply_file.png',
-						date: '2020-03-8',
-						status: '0',
-						name: '马宏宇',
-						age: '33',
-						phone: '18826519981'
-					},
-					{
-						applyName: '建档申请',
-						iconSrc: '../../../static/health/apply_file.png',
-						date: '2020-01-22',
-						status: '1',
-						name: '章汉夫',
-						age: '68',
-						phone: '18176519911'
-					},
-					{
-						applyName: '建档申请',
-						iconSrc: '../../../static/health/apply_file.png',
-						date: '2020-02-27',
-						status: '1',
-						name: '范长江',
-						age: '26',
-						phone: '18176510981'
-					},
-					{
-						applyName: '建档申请',
-						iconSrc: '../../../static/health/apply_file.png',
-						date: '2020-02-27',
-						status: '1',
-						name: '程孝先',
-						age: '33',
-						phone: '18171230981'
-					},
-					{
-						applyName: '建档申请',
-						iconSrc: '../../../static/health/apply_file.png',
-						date: '2020-02-27',
-						status: '1',
-						name: '林君雄',
-						age: '41',
-						phone: '18176321981'
-					},
-					{
-						applyName: '建档申请',
-						iconSrc: '../../../static/health/apply_file.png',
-						date: '2020-02-27',
-						status: '2',
-						name: '谭平山',
-						age: '31',
-						phone: '18176456981'
-					},
-					{
-						applyName: '建档申请',
-						iconSrc: '../../../static/health/apply_file.png',
-						date: '2020-02-27',
-						status: '2',
-						name: '李厚福',
-						age: '55',
-						phone: '13116456981'
-					},
-					{
-						applyName: '建档申请',
-						iconSrc: '../../../static/health/apply_file.png',
-						date: '2020-02-27',
-						status: '2',
-						name: '赵大华',
-						age: '49',
-						phone: '18716456981'
-					},
-					{
-						applyName: '建档申请',
-						iconSrc: '../../../static/health/apply_file.png',
-						date: '2020-02-27',
-						status: '2',
-						name: '罗元发',
-						age: '40',
-						phone: '18333456981'
-					},
-					{
-						applyName: '建档申请',
-						iconSrc: '../../../static/health/apply_file.png',
-						date: '2020-02-27',
-						status: '2',
-						name: '刘乃超',
-						age: '31',
-						phone: '18176456981'
-					},
-					{
-						applyName: '建档申请',
-						iconSrc: '../../../static/health/apply_file.png',
-						date: '2020-02-27',
-						status: '2',
-						name: '刘永生',
-						age: '44',
-						phone: '18176123981'
-					}
-				],
 				docSignData: [
 					{
 						applyName: '家医签约',
 						iconSrc: '../../../static/health/family_doctor.png',
-						date: '2020-05-17',
+						applyDate: '2020-05-17',
 						status: '0',
-						name: '王自健',
+						pname: '王自健',
 						age: '32',
-						phone: '18176511181'
+						mobile: '18176511181'
 					},
 					{
 						applyName: '家医签约',
 						iconSrc: '../../../static/health/family_doctor.png',
-						date: '2020-05-17',
+						applyDate: '2020-05-17',
 						status: '0',
-						name: '马继祖',
+						pname: '马继祖',
 						age: '55',
-						phone: '18176321181'
+						mobile: '18176321181'
 					},
 					{
 						applyName: '家医签约',
 						iconSrc: '../../../static/health/family_doctor.png',
-						date: '2020-05-17',
+						applyDate: '2020-05-17',
 						status: '0',
-						name: '朱希亮',
+						pname: '朱希亮',
 						age: '44',
-						phone: '18176578581'
+						mobile: '18176578581'
 					},
 					{
 						applyName: '家医签约',
 						iconSrc: '../../../static/health/family_doctor.png',
-						date: '2020-04-11',
+						applyDate: '2020-04-11',
 						status: '0',
-						name: '梁春平',
+						pname: '梁春平',
 						age: '46',
-						phone: '18176517781'
+						mobile: '18176517781'
 					},
 					{
 						applyName: '家医签约',
 						iconSrc: '../../../static/health/family_doctor.png',
-						date: '2020-03-8',
+						applyDate: '2020-03-8',
 						status: '0',
-						name: '马宏宇',
+						pname: '马宏宇',
 						age: '33',
-						phone: '18826519981'
+						mobile: '18826519981'
 					},
 					{
 						applyName: '家医签约',
 						iconSrc: '../../../static/health/family_doctor.png',
-						date: '2020-01-22',
+						applyDate: '2020-01-22',
 						status: '1',
-						name: '章汉夫',
+						pname: '章汉夫',
 						age: '68',
-						phone: '18176519911'
+						mobile: '18176519911'
 					},
 					{
 						applyName: '家医签约',
 						iconSrc: '../../../static/health/family_doctor.png',
-						date: '2020-02-27',
+						applyDate: '2020-02-27',
 						status: '1',
-						name: '范长江',
+						pname: '范长江',
 						age: '26',
-						phone: '18176510981'
+						mobile: '18176510981'
 					},
 					{
 						applyName: '家医签约',
 						iconSrc: '../../../static/health/family_doctor.png',
-						date: '2020-02-27',
+						applyDate: '2020-02-27',
 						status: '1',
-						name: '程孝先',
+						pname: '程孝先',
 						age: '33',
-						phone: '18171230981'
+						mobile: '18171230981'
 					},
 					{
 						applyName: '家医签约',
 						iconSrc: '../../../static/health/family_doctor.png',
-						date: '2020-02-27',
+						applyDate: '2020-02-27',
 						status: '1',
-						name: '林君雄',
+						pname: '林君雄',
 						age: '41',
-						phone: '18176321981'
+						mobile: '18176321981'
 					},
 					{
 						applyName: '家医签约',
 						iconSrc: '../../../static/health/family_doctor.png',
-						date: '2020-02-27',
+						applyDate: '2020-02-27',
 						status: '2',
-						name: '谭平山',
+						pname: '谭平山',
 						age: '31',
-						phone: '18176456981'
+						mobile: '18176456981'
 					},
 					{
 						applyName: '家医签约',
 						iconSrc: '../../../static/health/family_doctor.png',
-						date: '2020-02-27',
+						applyDate: '2020-02-27',
 						status: '2',
-						name: '李厚福',
+						pname: '李厚福',
 						age: '55',
-						phone: '13116456981'
+						mobile: '13116456981'
 					},
 					{
 						applyName: '家医签约',
 						iconSrc: '../../../static/health/family_doctor.png',
-						date: '2020-02-27',
+						applyDate: '2020-02-27',
 						status: '2',
-						name: '赵大华',
+						pname: '赵大华',
 						age: '49',
-						phone: '18716456981'
+						mobile: '18716456981'
 					},
 					{
 						applyName: '家医签约',
 						iconSrc: '../../../static/health/family_doctor.png',
-						date: '2020-02-27',
+						applyDate: '2020-02-27',
 						status: '2',
-						name: '罗元发',
+						pname: '罗元发',
 						age: '40',
-						phone: '18333456981'
+						mobile: '18333456981'
 					},
 					{
 						applyName: '家医签约',
 						iconSrc: '../../../static/health/family_doctor.png',
-						date: '2020-02-27',
+						applyDate: '2020-02-27',
 						status: '2',
-						name: '刘乃超',
+						pname: '刘乃超',
 						age: '31',
-						phone: '18176456981'
+						mobile: '18176456981'
 					},
 					{
 						applyName: '家医签约',
 						iconSrc: '../../../static/health/family_doctor.png',
-						date: '2020-02-27',
+						applyDate: '2020-02-27',
 						status: '2',
-						name: '刘永生',
+						pname: '刘永生',
 						age: '44',
-						phone: '18176123981'
+						mobile: '18176123981'
 					}
 				],
 				familyBedData:[
 					{
 						applyName: '家床申请',
 						iconSrc: '../../../static/health/home_sickbed2.png',
-						date: '2020-05-17',
+						applyDate: '2020-05-17',
 						status: '0',
-						name: '王自健',
+						pname: '王自健',
 						age: '32',
-						phone: '18176511181'
+						mobile: '18176511181'
 					},
 					{
 						applyName: '家床申请',
 						iconSrc: '../../../static/health/home_sickbed2.png',
-						date: '2020-05-17',
+						applyDate: '2020-05-17',
 						status: '0',
-						name: '马继祖',
+						pname: '马继祖',
 						age: '55',
-						phone: '18176321181'
+						mobile: '18176321181'
 					},
 					{
 						applyName: '家床申请',
 						iconSrc: '../../../static/health/home_sickbed2.png',
-						date: '2020-05-17',
+						applyDate: '2020-05-17',
 						status: '0',
-						name: '朱希亮',
+						pname: '朱希亮',
 						age: '44',
-						phone: '18176578581'
+						mobile: '18176578581'
 					},
 					{
 						applyName: '家床申请',
 						iconSrc: '../../../static/health/home_sickbed2.png',
-						date: '2020-04-11',
+						applyDate: '2020-04-11',
 						status: '0',
-						name: '梁春平',
+						pname: '梁春平',
 						age: '46',
-						phone: '18176517781'
+						mobile: '18176517781'
 					},
 					{
 						applyName: '家床申请',
 						iconSrc: '../../../static/health/home_sickbed2.png',
-						date: '2020-03-8',
+						applyDate: '2020-03-8',
 						status: '0',
-						name: '马宏宇',
+						pname: '马宏宇',
 						age: '33',
-						phone: '18826519981'
+						mobile: '18826519981'
 					},
 					{
 						applyName: '家床申请',
 						iconSrc: '../../../static/health/home_sickbed2.png',
-						date: '2020-01-22',
+						applyDate: '2020-01-22',
 						status: '1',
-						name: '章汉夫',
+						pname: '章汉夫',
 						age: '68',
-						phone: '18176519911'
+						mobile: '18176519911'
 					},
 					{
 						applyName: '家床申请',
 						iconSrc: '../../../static/health/home_sickbed2.png',
-						date: '2020-02-27',
+						applyDate: '2020-02-27',
 						status: '1',
-						name: '范长江',
+						pname: '范长江',
 						age: '26',
-						phone: '18176510981'
+						mobile: '18176510981'
 					},
 					{
 						applyName: '家床申请',
 						iconSrc: '../../../static/health/home_sickbed2.png',
-						date: '2020-02-27',
+						applyDate: '2020-02-27',
 						status: '1',
-						name: '程孝先',
+						pname: '程孝先',
 						age: '33',
-						phone: '18171230981'
+						mobile: '18171230981'
 					},
 					{
 						applyName: '家床申请',
 						iconSrc: '../../../static/health/home_sickbed2.png',
-						date: '2020-02-27',
+						applyDate: '2020-02-27',
 						status: '1',
-						name: '林君雄',
+						pname: '林君雄',
 						age: '41',
-						phone: '18176321981'
+						mobile: '18176321981'
 					},
 					{
 						applyName: '家床申请',
 						iconSrc: '../../../static/health/home_sickbed2.png',
-						date: '2020-02-27',
+						applyDate: '2020-02-27',
 						status: '2',
-						name: '谭平山',
+						pname: '谭平山',
 						age: '31',
-						phone: '18176456981'
+						mobile: '18176456981'
 					},
 					{
 						applyName: '家床申请',
 						iconSrc: '../../../static/health/home_sickbed2.png',
-						date: '2020-02-27',
+						applyDate: '2020-02-27',
 						status: '2',
-						name: '李厚福',
+						pname: '李厚福',
 						age: '55',
-						phone: '13116456981'
+						mobile: '13116456981'
 					},
 					{
 						applyName: '家床申请',
 						iconSrc: '../../../static/health/home_sickbed2.png',
-						date: '2020-02-27',
+						applyDate: '2020-02-27',
 						status: '2',
-						name: '赵大华',
+						pname: '赵大华',
 						age: '49',
-						phone: '18716456981'
+						mobile: '18716456981'
 					},
 					{
 						applyName: '家床申请',
 						iconSrc: '../../../static/health/home_sickbed2.png',
-						date: '2020-02-27',
+						applyDate: '2020-02-27',
 						status: '2',
-						name: '罗元发',
+						pname: '罗元发',
 						age: '40',
-						phone: '18333456981'
+						mobile: '18333456981'
 					},
 					{
 						applyName: '家床申请',
 						iconSrc: '../../../static/health/home_sickbed2.png',
-						date: '2020-02-27',
+						applyDate: '2020-02-27',
 						status: '2',
-						name: '刘乃超',
+						pname: '刘乃超',
 						age: '31',
-						phone: '18176456981'
+						mobile: '18176456981'
 					},
 					{
 						applyName: '家床申请',
 						iconSrc: '../../../static/health/home_sickbed2.png',
-						date: '2020-02-27',
+						applyDate: '2020-02-27',
 						status: '2',
-						name: '刘永生',
+						pname: '刘永生',
 						age: '44',
-						phone: '18176123981'
+						mobile: '18176123981'
 					}
 				]
 			}
 		},
 		onLoad() {
-			this.initPage()
+			let type = this.isType;
+			this.initPage();
+			this.initData(type);
 		},
 		methods: {
+			initData(type){
+				const self = this;
+				let timestamp=new Date().getTime();
+				self.listData =[];				self.$globalMethod.ds_api({					method:"list?reqtime="+timestamp,					loadmsg:"数据加载中",					showLoading:true,					data:{						"token":"xxxxx", "tosType":"10", "lsType":type					},					success:(res)=>{						if(!res || res.data.data.length==0){							return						}						let list=res.data.data;						list.map((item=>{
+							item.iconSrc= '../../../static/health/apply_file.png';
+							item.applyName= '建档申请';
+						}))
+						self.listData = list;					}									})			},
+			filing(){
+				this.tabTag = 0;
+				this.isFiling = true;
+				let type = this.isType;
+				this.initData(type);
+			},
 			initPage() {
 				let _this = this
 				switch(_this.tabTag) {
-					case 0:
-					_this.dataProcessing(_this.applyData)
-					break;
 					case 1:
 					_this.dataProcessing(_this.docSignData)
 					break;
@@ -503,13 +381,26 @@
 			},
 			changeTab(tabNum) {
 				let _this = this 
-				_this.tabTag = tabNum
+				_this.tabTag = tabNum;
+				_this.isFiling = false;
 				_this.initPage()
 			},
 			changeStatus(sNum) {
-				let _this = this
-				_this.statusTag = sNum
-				_this.initPage()
+				let _this = this;
+				if(_this.isFiling){
+					_this.statusTag = sNum
+					if(sNum=='0'){
+						_this.initData('1');
+					}else if(sNum=='1'){
+						_this.initData('2');
+					}else if(sNum=='2'){
+						_this.initData('3');
+					}
+				}else{
+					_this.statusTag = sNum
+					_this.initPage()
+				}
+				
 			},
 			dataProcessing(data) {
 				let _this = this
@@ -526,7 +417,7 @@
 						item.statusName = '已拒绝'
 						break;
 					}
-					item.phoneNum = item.phone.replace(
+					item.phoneNum = item.mobile.replace(
 						/(\w{2})\w*(\w{3})/,
 						'$1*******$2'
 					)
@@ -537,11 +428,12 @@
 				})
 				_this.listData = temp
 			},
-			dealAudit(dealType) {
+			dealAudit(obj,dealType) {
 				switch(dealType) {
 					case 0:
+					let objJSON = JSON.stringify(obj.detailJSON)
 					uni.navigateTo({
-					    url: '/pages/bsoftMedical/health/archives-apply'
+					    url: '/pages/bsoftMedical/health/archives-apply?detailData='+objJSON
 					})
 					break;
 					case 1:

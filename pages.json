@@ -28,7 +28,11 @@
 		{
 			"path": "pages/bsoftMedical/health/health-file",
 			"style": {
-				"navigationBarTitleText": "健康档案"
+				"navigationStyle": "custom",
+				"app-plus": {
+					"titleNView": false,
+					"animationType": "slide-in-right"
+				}	
 			}
 		},
 		{
@@ -100,7 +104,33 @@
 		{
 			"path": "pages/bsoftMedical/health/question-manage",
 			"style": {
-				"navigationBarTitleText": "问卷"
+				"navigationStyle": "custom",
+				"app-plus": {
+					"titleNView": false,
+					"animationType": "slide-in-right"
+				}	
+			}
+		},
+		{
+			"path": "pages/bsoftMedical/health/identify-result",
+			"style": {
+				"navigationBarTitleText": "体质辨识结果"
+			}
+		},
+		{
+			"path": "pages/bsoftMedical/health/edit-result",//编辑
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"titleNView": false,
+					"animationType": "slide-in-right"
+				}	
+			}
+		},
+		{
+			"path": "pages/bsoftMedical/health/guide",
+			"style": {
+				"navigationBarTitleText": "中医药健康指导"
 			}
 		},
 		{
@@ -143,6 +173,12 @@
 			"path": "pages/bsoftMedical/dwellings/add",
 			"style": {
 				"navigationBarTitleText": "添加成员"				
+			}
+		},
+		{
+			"path": "pages/bsoftMedical/dwellings/people-list",
+			"style": {
+				"navigationBarTitleText": "成员列表"				
 			}
 		},
 		{

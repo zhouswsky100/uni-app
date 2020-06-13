@@ -13,7 +13,7 @@
 		</semp-navbar>
 		<view class="content">
 			<view class="uni-textarea">
-				<textarea placeholder-style="color:#b0b0b0;font-size: 30upx;" :placeholder="togglePlaceholder"/>
+				<textarea placeholder-style="color:#b0b0b0;font-size: 30upx;" :value="togglePlaceholder"/>
 			</view>
 		</view>
 	</view>

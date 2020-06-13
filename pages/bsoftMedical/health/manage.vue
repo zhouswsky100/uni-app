@@ -22,11 +22,11 @@
 				<view class="inner1">
 					<view class="outer3" style="padding-left: 0;">年龄:{{item.age}} <view class="line"></view></view>
 					<view class="outer3">性别:{{item.male}}<view class="line"></view></view>
-					<view class="outer3">电话:{{item.phone}}</view>
+					<view class="outer3"><image class="call" src="@/static/my/call.png"></image><view class="phone">{{item.phone}}</view></view>
 				</view>
 				<view class="inner1">
 					<image class="outer4" src="@/static/health/date.png" ></image>
-					<view class="outer5">建档时间：2020-05-07</view>
+					<view class="outer5">计划随访时间：{{item.time}}</view>
 				</view>
 				<view class="nextBox" @click="goManage(item)">随访</view>
 				<view class="contentFooter">
@@ -47,114 +47,262 @@
 			return{
 				typeList:[
 					{
-						title:'老年人',
+						title:'高血压',
 						id:'0',
 					},
 					{
-						title:'高血压',
+						title:'糖尿病',
 						id:'1',
 					},
 					{
-						title:'糖尿病',
+						title:'中医药',
 						id:'2',
 					},
 					{
-						title:'中医药',
+						title:'健康体检',
 						id:'3',
-					}
+					},
+					{
+						title:'老年人',
+						id:'4',
+					},
 				],
 				toggleId:'0',
 				loadingType:"noMore",
 				contentList:[
 					{
-						name:'王子健',
-						age:'18',
+						name:'范秋阳',
+						age:'65',
 						male:'男',
-						phone:'18779868888',
-						time:'2020-05-07',
+						phone:'13678768888',
+						time:'2020-05-30',
 						type:'0',
 						id:'0'
 					},
 					{
-						name:'李四',
-						age:'28',
+						name:'史朝雨',
+						age:'48',
 						male:'男',
-						phone:'18779868888',
-						time:'2020-05-07',
+						phone:'18779868123',
+						time:'2020-05-31',
 						type:'1',
 						id:'1'
 					},
 					{
-						name:'王子健',
-						age:'18',
-						male:'男',
-						phone:'18779868888',
-						time:'2020-05-07',
+						name:'詹一璇',
+						age:'68',
+						male:'女',
+						phone:'13145632453',
+						time:'2020-06-01',
 						type:'2',
 						id:'2'
 					},
 					{
-						name:'刘清',
-						age:'18',
-						male:'女',
-						phone:'18779868888',
-						time:'2020-05-07',
+						name:'田幻波',
+						age:'78',
+						male:'男',
+						phone:'18998766732',
+						time:'2020-06-02',
 						type:'3',
 						id:'3'
 					},
 					{
-						name:'郭子健',
-						age:'38',
-						male:'男',
-						phone:'18779868888',
-						time:'2020-05-07',
+						name:'申秀美',
+						age:'61',
+						male:'女',
+						phone:'15645729871',
+						time:'2020-06-03',
 						type:'2',
 						id:'4'
 					},
 					{
-						name:'田子健',
-						age:'33',
+						name:'朱浦泽',
+						age:'63',
 						male:'男',
-						phone:'18779868888',
-						time:'2020-05-07',
+						phone:'13554543232',
+						time:'2020-06-04',
 						type:'0',
 						id:'5'
 					},
 					{
-						name:'周子健',
-						age:'18',
+						name:'翟子明',
+						age:'54',
 						male:'男',
-						phone:'18779868888',
-						time:'2020-05-07',
+						phone:'17698124334',
+						time:'2020-06-05',
 						type:'1',
 						id:'6'
 					},
 					{
 						name:'许子健',
-						age:'18',
+						age:'65',
 						male:'男',
-						phone:'18779868888',
-						time:'2020-05-07',
+						phone:'18712674376',
+						time:'2020-06-06',
 						type:'2',
 						id:'7'
 					},
 					{
-						name:'刘子健',
-						age:'18',
+						name:'宋弘文',
+						age:'69',
 						male:'男',
-						phone:'18779868888',
-						time:'2020-05-07',
+						phone:'18979868291',
+						time:'2020-06-07',
 						type:'3',
 						id:'8'
 					},
 					{
-						name:'王健',
-						age:'48',
+						name:'廖鸿德',
+						age:'62',
 						male:'男',
-						phone:'18779868888',
-						time:'2020-05-07',
+						phone:'13333489961',
+						time:'2020-06-08',
 						type:'2',
 						id:'9'
+					},
+					{
+						name:'李兴安',
+						age:'45',
+						male:'男',
+						phone:'18999862213',
+						time:'2020-06-09',
+						type:'0',
+						id:'10'
+					},
+					{
+						name:'马伟才',
+						age:'46',
+						male:'男',
+						phone:'18178769901',
+						time:'2020-06-10',
+						type:'0',
+						id:'11'
+					},
+					{
+						name:'易良朋',
+						age:'51',
+						male:'男',
+						phone:'17789980012',
+						time:'2020-06-11',
+						type:'0',
+						id:'12'
+					},
+					{
+						name:'从元纬',
+						age:'54',
+						male:'男',
+						phone:'13779868301',
+						time:'2020-06-12',
+						type:'0',
+						id:'13'
+					},
+					{
+						name:'李飞雨',
+						age:'50',
+						male:'男',
+						phone:'18999898891',
+						time:'2020-06-12',
+						type:'0',
+						id:'14'
+					},
+					{
+						name:'唐嘉茂',
+						age:'61',
+						male:'男',
+						phone:'18999862213',
+						time:'2020-06-13',
+						type:'0',
+						id:'15'
+					},
+					{
+						name:'尚奇胜',
+						age:'61',
+						male:'男',
+						phone:'18999862213',
+						time:'2020-06-03',
+						type:'1',
+						id:'16'
+					},
+					{
+						name:'邹立果',
+						age:'55',
+						male:'男',
+						phone:'18999862213',
+						time:'2020-06-04',
+						type:'1',
+						id:'17'
+					},
+					{
+						name:'籍弘图',
+						age:'63',
+						male:'男',
+						phone:'18999862213',
+						time:'2020-06-05',
+						type:'1',
+						id:'18'
+					},
+					{
+						name:'潘阳冰',
+						age:'62',
+						male:'男',
+						phone:'18999862213',
+						time:'2020-06-06',
+						type:'1',
+						id:'19'
+					},
+					{
+						name:'田力言',
+						age:'48',
+						male:'男',
+						phone:'18999862213',
+						time:'2020-06-07',
+						type:'1',
+						id:'20'
+					},
+					{
+						name:'杜力行',
+						age:'78',
+						male:'男',
+						phone:'18999862213',
+						time:'2020-06-08',
+						type:'1',
+						id:'21'
+					},
+					{
+						name:'牛和韵',
+						age:'70',
+						male:'男',
+						phone:'18999862213',
+						time:'2020-06-09',
+						type:'1',
+						id:'22'
+					},
+					{
+						name:'习天',
+						age:'54',
+						male:'男',
+						phone:'18999862213',
+						time:'2020-06-10',
+						type:'1',
+						id:'23'
+					},
+					{
+						name:'杨火福',
+						age:'64',
+						male:'男',
+						phone:'17779862345',
+						time:'2020-06-10',
+						type:'4',
+						id:'24'
+					},
+					{
+						name:'张磊',
+						age:'67',
+						male:'男',
+						phone:'13899786645',
+						time:'2020-06-11',
+						type:'4',
+						id:'25'
 					},
 				],
 			}
@@ -173,30 +321,39 @@
 			},
 			goManage(obj){
 				switch(obj.type){
+					
 					case '0':
-						//老年人
-						uni.showToast({
-						    title: '暂无开发',
-						    duration: 2000,
-							icon:'none',
-						});
-					break;
-					case '1':
 						//高血压
 						uni.navigateTo({
 						    url: '/pages/bsoftMedical/health/hypertensive-manage'
 						});
 					break;
-					case '2':
+					case '1':
 						//糖尿病
 						uni.navigateTo({
 						    url: '/pages/bsoftMedical/health/diabetes-manage'
 						});
 					break;
-					case '3':
+					case '2':
 						//中医药
 						uni.navigateTo({
 						    url: '/pages/bsoftMedical/health/medicine-manage?id='+obj.id
+						});
+					break;
+					case '3':
+						//健康体检
+						uni.showToast({
+						    title: '功能完善中',
+						    duration: 2000,
+							icon:'none',
+						});
+					break;
+					case '4':
+						//老年人
+						uni.showToast({
+						    title: '功能完善中',
+						    duration: 2000,
+							icon:'none',
 						});
 					break;
 				}
@@ -304,6 +461,16 @@
 						font-size: 24upx;
 						padding:0 25upx;
 						position: relative;
+						.call{
+							width: 26upx;
+							height: 32upx;
+							position: absolute;
+							top: 50%;
+							margin-top: -16upx;
+						}
+						.phone{
+							padding-left: 34upx;
+						}
 						.line{
 							position: absolute;
 							right: 0;
@@ -354,6 +521,8 @@
 						.outer6{
 							flex: 1;
 							display: flex;
+							color: #666;
+							font-size: 24upx;
 							&.outer7{
 								justify-content: flex-end;
 								align-items: center;

@@ -2,7 +2,7 @@
 	<view class="wrap">
 		<view class="banner1">健康档案数量</view>
 		<view class="banner2">
-			<view class="inner1"  @click="goHealthFile">
+			<view class="inner1"  @click="goHealthFile('1')">
 				<view class="outer1">
 					<image src="@/static/health/file2.png"></image>
 					<view>健康档案</view>
@@ -12,12 +12,12 @@
 			<view class="inner2">
 				<view class="outer3">
 					<view class="outer4">有效数量</view>
-					<view class="num">6984</view>
+					<view class="num">11452</view>
 					<view class="line"></view>
 				</view>
 				<view class="outer3">
 					<view class="outer4">无效数量</view>
-					<view class="num" style="color: #00C0B1;">6984</view>
+					<view class="num" style="color: #00C0B1;">16460</view>
 				</view>
 			</view>
 		</view>
@@ -25,7 +25,7 @@
 		<view class="banner3">
 			<view class="listBox" >
 				<view class="listContent">
-					<view class="listHeader" >
+					<view class="listHeader" @click="goHealthFile('2')">
 						<view class="outer1">
 							<image src="@/static/health/hypertension.png"></image>
 							<view>高血压</view>
@@ -34,17 +34,17 @@
 					</view>
 					<view class="listNumBox">
 						<view class="listT">有效数量</view>
-						<view class="listNum1">9265</view>
+						<view class="listNum1">803</view>
 					</view>
 					<view class="listNumBox">
 						<view class="listT">无效数量</view>
-						<view class="listNum2">2345</view>
+						<view class="listNum2">111</view>
 					</view>
 				</view>
 			</view>	
 			<view class="listBox" >
 				<view class="listContent">
-					<view class="listHeader" >
+					<view class="listHeader" @click="goHealthFile('3')">
 						<view class="outer1">
 							<image src="@/static/health/diabetes.png"></image>
 							<view>糖尿病</view>
@@ -53,75 +53,18 @@
 					</view>
 					<view class="listNumBox">
 						<view class="listT">有效数量</view>
-						<view class="listNum1">9265</view>
+						<view class="listNum1">311</view>
 					</view>
 					<view class="listNumBox">
 						<view class="listT">无效数量</view>
-						<view class="listNum2">2345</view>
+						<view class="listNum2">49</view>
 					</view>
 				</view>
 				
 			</view>	
 			<view class="listBox" >
 				<view class="listContent">
-					<view class="listHeader" >
-						<view class="outer1">
-							<image src="@/static/health/pregnant.png"></image>
-							<view>孕产妇</view>
-						</view>
-						<image class="outer2" src="@/static/health/next.png"></image>
-					</view>
-					<view class="listNumBox">
-						<view class="listT">有效数量</view>
-						<view class="listNum1">9265</view>
-					</view>
-					<view class="listNumBox">
-						<view class="listT">无效数量</view>
-						<view class="listNum2">2345</view>
-					</view>
-				</view>
-			</view>	
-			<view class="listBox" >
-				<view class="listContent">
-					<view class="listHeader" >
-						<view class="outer1">
-							<image src="@/static/health/child.png"></image>
-							<view>儿童</view>
-						</view>
-						<image class="outer2" src="@/static/health/next.png"></image>
-					</view>
-					<view class="listNumBox">
-						<view class="listT">有效数量</view>
-						<view class="listNum1">9265</view>
-					</view>
-					<view class="listNumBox">
-						<view class="listT">无效数量</view>
-						<view class="listNum2">2345</view>
-					</view>
-				</view>
-			</view>	
-			<view class="listBox" >
-				<view class="listContent">
-					<view class="listHeader" >
-						<view class="outer1">
-							<image src="@/static/health/tuberculos.png"></image>
-							<view>肺结核</view>
-						</view>
-						<image class="outer2" src="@/static/health/next.png"></image>
-					</view>
-					<view class="listNumBox">
-						<view class="listT">有效数量</view>
-						<view class="listNum1">9265</view>
-					</view>
-					<view class="listNumBox">
-						<view class="listT">无效数量</view>
-						<view class="listNum2">2345</view>
-					</view>
-				</view>
-			</view>	
-			<view class="listBox" >
-				<view class="listContent">
-					<view class="listHeader" >
+					<view class="listHeader" @click="goHealthFile('7')">
 						<view class="outer1">
 							<image src="@/static/health/old.png"></image>
 							<view>老年人</view>
@@ -130,14 +73,72 @@
 					</view>
 					<view class="listNumBox">
 						<view class="listT">有效数量</view>
-						<view class="listNum1">9265</view>
+						<view class="listNum1">1454</view>
 					</view>
 					<view class="listNumBox">
 						<view class="listT">无效数量</view>
-						<view class="listNum2">2345</view>
+						<view class="listNum2">120</view>
+					</view>
+				</view>
+			</view>
+			<view class="listBox" >
+				<view class="listContent">
+					<view class="listHeader" @click="goHealthFile('4')">
+						<view class="outer1">
+							<image src="@/static/health/pregnant.png"></image>
+							<view>孕产妇</view>
+						</view>
+						<image class="outer2" src="@/static/health/next.png"></image>
+					</view>
+					<view class="listNumBox">
+						<view class="listT">有效数量</view>
+						<view class="listNum1">暂无</view>
+					</view>
+					<view class="listNumBox">
+						<view class="listT">无效数量</view>
+						<view class="listNum2">暂无</view>
 					</view>
 				</view>
 			</view>	
+			<view class="listBox" >
+				<view class="listContent">
+					<view class="listHeader" @click="goHealthFile('5')">
+						<view class="outer1">
+							<image src="@/static/health/child.png"></image>
+							<view>儿童</view>
+						</view>
+						<image class="outer2" src="@/static/health/next.png"></image>
+					</view>
+					<view class="listNumBox">
+						<view class="listT">有效数量</view>
+						<view class="listNum1">暂无</view>
+					</view>
+					<view class="listNumBox">
+						<view class="listT">无效数量</view>
+						<view class="listNum2">暂无</view>
+					</view>
+				</view>
+			</view>	
+			<view class="listBox" >
+				<view class="listContent">
+					<view class="listHeader" @click="goHealthFile('6')">
+						<view class="outer1">
+							<image src="@/static/health/tuberculos.png"></image>
+							<view>肺结核</view>
+						</view>
+						<image class="outer2" src="@/static/health/next.png"></image>
+					</view>
+					<view class="listNumBox">
+						<view class="listT">有效数量</view>
+						<view class="listNum1">暂无</view>
+					</view>
+					<view class="listNumBox">
+						<view class="listT">无效数量</view>
+						<view class="listNum2">暂无</view>
+					</view>
+				</view>
+			</view>	
+				
 		</view>
 	</view>
 </template>
@@ -150,10 +151,18 @@
 			}
 		},
 		methods:{
-			goHealthFile(){
-				uni.navigateTo({
-				    url: '/pages/bsoftMedical/health/health-file'
-				});
+			goHealthFile(id){
+				if(id=='4' || id=='5' || id=='6'){
+					uni.showToast({
+					    title: '功能完善中',
+					    duration: 2000,
+						icon:'none'
+					});
+				}else{
+					uni.navigateTo({
+					    url: '/pages/bsoftMedical/health/health-file?id='+id
+					});
+				}
 			}
 		}
 	}

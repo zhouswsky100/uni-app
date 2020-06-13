@@ -9,19 +9,19 @@
 				</view>
 			</view>
 			<view class="headListBox">
-				<view class="headList">
+				<view class="headList" @click="notYet()">
 					<view class="listImgBox">
 						<image class="performance" src="@/static/my/performance.png"></image>
 					</view>
 					<view class="listTitle">我的绩效</view>
 				</view>
-				<view class="headList">
+				<view class="headList" @click="notYet()">
 					<view class="listImgBox">
 						<image class="team_interact" src="@/static/my/team_interact.png"></image>
 					</view>
 					<view class="listTitle">团队互动</view>
 				</view>
-				<view class="headList">
+				<view class="headList" @click="notYet()">
 					<view class="listImgBox">
 						<image class="knowledge_base" src="@/static/my/knowledge_base.png"></image>
 					</view>
@@ -29,20 +29,24 @@
 				</view>
 			</view>
 			<view class="bg"></view>
-			<view class="xiaoxi">
+			<view class="xiaoxi" @click="notYet()">
 				<view class="hasInfoFlag"></view>
 			</view>
 		</view>
 		<view class="banner1">
 			<view class="titleBox" @click="screen()">
 				<view class="span">{{projectName}}</view>
-				<view class="cBottom"></view>
+				<view class="down"></view>
 			</view>
 			<view class="titleBox">
 				<view class="span">计划随访时间</view>
-				<view>
-					<view class="cTop"></view>
-					<view class="cBottom"></view>
+				<view class="topbottom">
+					<view class="ctopBox">
+						<view class="cTop"></view>
+					</view>
+					<view class="cbottomBox">
+						<view class="cBottom"></view>
+					</view>
 				</view>
 			</view>
 		</view>
@@ -66,9 +70,9 @@
 				<button @click="process(item)">处理</button>
 			</view>
 		</view>
-		<view v-if="screenShow" class="dialogBox">
+		<view v-if="screenShow" class="dialogBox" @click="closeDialog">
 			<view class="dialog">
-				<view class="dialogList" v-for="(item,index) in projectList" :key="index" @click="checkProject(item)">{{item.name}}</view>
+				<view class="dialogList" v-for="(item,index) in projectList" :key="index" @click.stop="checkProject(item)">{{item.name}}</view>
 			</view>
 		</view>
 	</view>
@@ -84,67 +88,103 @@ export default {
 			itemList:[
 				{
 					title:'糖尿病随访',
-					name:'王子建',
-					time:'2020-05-10',
-					phone:'13537758058',
-					type:'2',
+					name:'范秋阳',
+					age:'65',
+					male:'男',
+					phone:'13678768888',
+					time:'2020-05-30',
+					type:'1',
 					id:0
 				},
 				{
 					title:'高血压随访',
-					name:'张伟',
-					time:'2020-05-10',
-					phone:'13537758058',
-					type:'1',
+					name:'史朝雨',
+					age:'48',
+					male:'男',
+					phone:'18779868123',
+					time:'2020-05-31',
+					type:'0',
 					id:1
 				},
 				{
 					title:'老年人随访',
-					name:'王丽娟',
-					time:'2020-05-10',
-					phone:'13537758058',
-					type:'0',
+					name:'詹一璇',
+					age:'68',
+					male:'女',
+					phone:'13145632453',
+					time:'2020-06-01',
+					type:'3',
 					id:2
 				},
 				{
 					title:'中医体质辨识',
-					name:'何自君',
-					time:'2020-05-10',
-					phone:'13537758058',
-					type:'3',
+					name:'田幻波',
+					age:'78',
+					male:'男',
+					phone:'18998766732',
+					time:'2020-06-02',
+					type:'2',
 					id:3
 				},
 				{
 					title:'糖尿病随访',
-					name:'刘子建',
-					time:'2020-05-09',
-					phone:'13537758123',
-					type:'2',
+					name:'申秀美',
+					age:'61',
+					male:'女',
+					phone:'15645729871',
+					time:'2020-06-03',
+					type:'1',
 					id:4
 				},
 				{
 					title:'高血压随访',
-					name:'范伟',
-					time:'2020-05-09',
-					phone:'13537743058',
-					type:'1',
+					name:'朱浦泽',
+					age:'63',
+					male:'男',
+					phone:'13554543232',
+					time:'2020-06-04',
+					type:'0',
 					id:5
 				},
 				{
 					title:'老年人随访',
-					name:'李丽娟',
-					time:'2020-05-09',
-					phone:'13537751258',
-					type:'0',
+					name:'翟子明',
+					age:'54',
+					male:'男',
+					phone:'17698124334',
+					time:'2020-06-05',
+					type:'3',
 					id:6
 				},
 				{
 					title:'中医体质辨识',
-					name:'杨自君',
-					time:'2020-05-09',
-					phone:'13537758238',
-					type:'3',
+					name:'许子健',
+					age:'65',
+					male:'男',
+					phone:'18712674376',
+					time:'2020-06-06',
+					type:'2',
 					id:7
+				},
+				{
+					title:'中医体质辨识',
+					name:'宋弘文',
+					age:'69',
+					male:'男',
+					phone:'18979868291',
+					time:'2020-06-07',
+					type:'2',
+					id:8
+				},
+				{
+					title:'中医体质辨识',
+					name:'廖鸿德',
+					age:'62',
+					male:'男',
+					phone:'13333489961',
+					time:'2020-06-08',
+					type:'2',
+					id:9
 				},
 				
 			],
@@ -156,25 +196,26 @@ export default {
 					id:'-1',
 					value:'随访项目'
 				},
-				{
-					name:'老年人',
-					id:'0',
-					value:'老年人'
-				},
+				
 				{
 					name:'高血压',
-					id:'1',
+					id:'0',
 					value:'高血压'
 				},
 				{
 					name:'糖尿病',
-					id:'2',
+					id:'1',
 					value:'糖尿病'
 				},
 				{
 					name:'中医药',
-					id:'3',
+					id:'2',
 					value:'中医药'
+				},
+				{
+					name:'老年人',
+					id:'3',
+					value:'老年人'
 				},
 			],
 			screenShow:false,
@@ -182,7 +223,7 @@ export default {
 	},
 	methods:{
 		screen(){
-			this.screenShow=true;
+			this.screenShow=!this.screenShow;
 			//this.$refs.popup.open()
 		},
 		checkProject(obj){
@@ -199,11 +240,14 @@ export default {
 				})
 			}
 		},
+		closeDialog(){
+			this.screenShow=false;
+		},
 		//跳转随访
 		process(obj){
 			let type = obj.type;
 			switch(type){
-				case '0':
+				case '3':
 					//老年人
 					uni.showToast({
 					    title: '暂无开发',
@@ -211,26 +255,33 @@ export default {
 						icon:'none',
 					});
 				break;
-				case '1':
+				case '0':
 					//高血压
 					uni.navigateTo({
 					    url: '/pages/bsoftMedical/health/hypertensive-manage'
 					});
 				break;
-				case '2':
+				case '1':
 					//糖尿病
 					uni.navigateTo({
 					    url: '/pages/bsoftMedical/health/diabetes-manage'
 					});
 				break;
-				case '3':
+				case '2':
 					//中医药
 					uni.navigateTo({
 					    url: '/pages/bsoftMedical/health/medicine-manage?id='+obj.id
 					});
 				break;
 			}
-		}
+		},
+		notYet(){
+			uni.showToast({
+			    title: '功能完善中',
+			    duration: 2000,
+				icon:'none'
+			});
+		},
 	},
 	onShow(){
 		this.showList = this.itemList;
@@ -340,7 +391,7 @@ export default {
 	}
 	.banner1{
 		height: 93upx;
-		padding:30upx 27upx;
+		padding:0 27upx;
 		width: 100%;
 		display: flex;
 		.titleBox{
@@ -356,22 +407,48 @@ export default {
 				display: flex;
 				flex-direction: column;
 			}
-			.cTop{
-				background-image: url(@/static/my/unfold.png);
+			.down{
+				background-image: url(@/static/my/down.png);
 				background-size: 100%;
 				background-repeat: no-repeat;
-				width:18upx ;
-				height:10upx ;
-				transform:rotate(180deg);
-				margin-bottom: 6upx;
+				width:12upx ;
+				height:6upx ;
 			}
-			.cBottom{
-				background-image: url(@/static/my/unfold.png);
-				background-size: 100%;
-				background-repeat: no-repeat;
-				width:18upx ;
-				height:10upx ;
+			.topbottom{
+				height: 100%;
+				display: flex;
+				flex-direction: column;
+				width: 40upx;
+				.ctopBox{
+					flex: 1;
+					display: flex;
+					align-items: flex-end;
+					margin-bottom: 4upx;
+					.cTop{
+						background-image: url(@/static/my/top.png);
+						background-size: 100%;
+						background-repeat: no-repeat;
+						width:18upx ;
+						height:10upx ;
+					}
+				}
+				.cbottomBox{
+					flex: 1;
+					display: flex;
+					align-items: flex-start;
+					margin-top: 4upx;
+					.cBottom{
+						background-image: url(@/static/my/bottom.png);
+						background-size: 100%;
+						background-repeat: no-repeat;
+						transform:rotate(180deg);
+						width:18upx ;
+						height:10upx ;
+					}
+				}
 			}
+			
+			
 		}
 	}
 	.contentBox{

@@ -3,7 +3,7 @@
 来自 light 
 作者 light
 */
-const serviceURL="https://jklz.jkluzhou.cn/healthy/api.do?";//地址
+const serviceURL="http://192.168.3.254:9900/bsoft-portal/web/bsoft/health-manage/famdoctorService/";//地址
 const dsHearder={'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'};
 // const sempHearder= {'content-type': 'application/x-www-form-urlencoded'};
 var openID="";
@@ -326,6 +326,231 @@ function hqkFuncBuildBirthdayByCardid(idCard){
 		}
 		return sexStr;
 	};
+	function yhdFuncSex(sexId){//性别字典
+		let sexStr = '';
+		switch(sexId){
+			case '1':
+				sexStr='男';
+			break;
+			case '2':
+				sexStr='女';
+			break;
+			default:
+				sexStr='未知';
+		}
+		return sexStr
+	}
+	function yhdFuncHometype(id){//常驻类型
+		let str = '';
+		switch(id){
+			case '1':
+				str='户籍';
+			break;
+			case '2':
+				str='非户籍';
+			break;
+		}
+		return str
+	}
+	function yhdFuncNation(nationId){//民族字典
+		let nationStr = '';
+		switch(nationId){
+			case '01':
+				nationStr='汉族';
+			break;
+			case '99':
+				nationStr='少数民族';
+			break;
+		}
+		return nationStr
+	}
+	function yhdFuncCultural(id){ //学历字典
+		let str = '';
+		switch(id){
+			case '1':
+				str='研究生';
+			break;
+			case '2':
+				str='大学本科';
+			break;
+			case '3':
+				str='大学专科和专科学校';
+			break;
+			case '4':
+				str='中等专业学校';
+			break;
+			case '5':
+				str='技工学校';
+			break;
+			case '6':
+				str='高中';
+			break;
+			case '7':
+				str='初中';
+			break;
+			case '8':
+				str='小学';
+			break;
+			case '9':
+				str='文盲或半文盲';
+			break;
+			case '10':
+				str='不详';
+			break;
+		}
+		return str
+	}
+	function yhdFuncCardType(id){
+		let str = '';
+		switch(id){
+			case '01':
+				str='居民身份证';
+			break;
+			case '02':
+				str='居民户口簿';
+			break;
+			case '03':
+				str='护照';
+			break;
+			case '04':
+				str='军官证';
+			break;
+			case '05':
+				str='驾驶证';
+			break;
+			case '06':
+				str='港澳居民往来内地通行证';
+			break;
+			case '07':
+				str='台湾居民往来内地通行证';
+			break;
+			case '99':
+				str='其他法定有效证件';
+			break;
+			
+		}
+		return str
+	}
+	function yhdFuncOccupation(id){ //职业字典
+		let str = '';
+		switch(id){
+			case '0':
+				str='国家机关、党群组织、企业、事业单位负责人';
+			break;
+			case '1':
+				str='专业技术人员';
+			break;
+			case '2':
+				str='办事人员和有关人员';
+			break;
+			case '3':
+				str='商业、服务业人员';
+			break;
+			case '4':
+				str='农、林、牧、渔、水利业生产人员';
+			break;
+			case '5':
+				str='生产、运输设备操作人员及有关人员';
+			break;
+			case '6':
+				str='军人';
+			break;
+			case '7':
+				str='不便分类的其他从业人员';
+			break;
+		}
+		return str;
+	}
+	function yhdFuncMarriage(id){//婚姻字典
+		let str = '';
+		switch(id){
+			case '1':
+				str='未婚';
+			break;
+			case '2':
+				str='已婚';
+			break;
+			case '3':
+				str='丧偶';
+			break;
+			case '4':
+				str='离婚';
+			break;
+			case '5':
+				str='未说明的婚姻状况';
+			break;
+		}
+		return str;
+	}
+	function yhdFuncPayType(id){//支付类型字典
+		let str = '';
+		switch(id){
+			case '01':
+				str='城镇职工基本医疗保险';
+			break;
+			case '02':
+				str='城镇居民基本医疗保险';
+			break;
+			case '03':
+				str='新型农村合作医疗';
+			break;
+			case '04':
+				str='贫困救助';
+			break;
+			case '05':
+				str='商业医疗保险';
+			break;
+			case '06':
+				str='全公费';
+			break;
+			case '07':
+				str='全自费';
+			break;
+			case '99':
+				str='其他';
+			break;
+		}
+		return str;
+	}
+	function arrSplicedh(obj){
+		let str='';
+		if(obj.length==0){
+			str='';
+		}else{
+			str=obj.toString();
+		}
+		return str;
+	}
+	function arrSpliceDisease(obj){//既往史
+		let arr=[];
+		obj.map((item)=>{
+			if(!item.pickerDis){
+				if(item.hasOwnProperty('inputValue')){
+					let str = item.type +'|' + item.inputValue +'|' + item.date
+					arr.push(str);
+				}else{
+					let str = item.type +'|'  + item.date
+					arr.push(str);
+				}
+			}
+		})
+		let result = arr.toString();
+		return result;
+	}
+	function arrSpliceStr(obj,type){
+		let result;
+		if(type.indexOf("01")>-1){
+			result='';
+		}else{
+			let arr=[];
+			obj.map((item)=>{
+				let str = item.inputValue +'|' + item.date
+				arr.push(str);
+			})
+			 result = arr.toString();
+		}
+		return result;
+	}
 /**********引用总工程函数 ---end************************************/
 
 
@@ -345,6 +570,16 @@ export default {
 	hqkFuncStartWith,
 	hqkFuncBuildBirthdayByCardid,
 	hqkFuncBuildSexByCardid,
-	getPageName
-	
+	getPageName,
+	yhdFuncSex,
+	yhdFuncHometype,
+	yhdFuncNation,
+	yhdFuncCultural,
+	yhdFuncCardType,
+	yhdFuncOccupation,
+	yhdFuncMarriage,
+	yhdFuncPayType,
+	arrSplicedh,
+	arrSpliceDisease,
+	arrSpliceStr
 }

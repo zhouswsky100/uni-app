@@ -57,7 +57,7 @@
 					</view>
 			</view>
 			<view class="opButton" v-if="isShowButton">
-				<text class="refused">拒绝</text>
+				<text class="refused" @click="refused">拒绝</text>
 				<text class="agree" @click="isShowButton = false,isCollapse = true,isUnfold = true">同意</text>
 			</view>
 		</view>
@@ -136,11 +136,23 @@
 				提交
 			</view>
 		</view>
+		<uni-popup  ref="popup" type="bottom">
+			<view class="addPharmacy">
+				<view class="h2">拒绝原因</view>
+				<view class="uni-textarea dialogTextarea">
+					<textarea  maxlength="1000" @input="refusedInput" placeholder-style="color:#A5A8AF" placeholder="请填写拒绝原因"/>
+					<view class="garyBox">{{titleLength}}/1000</view>
+				</view>
+				<view class="refusedButton" @click="refusedSubmit">提交</view>
+			</view>
+		</uni-popup>
 	</view>
 </template>
 
 <script>
+	import uniPopup from '@/components/uni-popup/uni-popup.vue'
 	export default {
+	    components: {uniPopup},
 		data() {
 			return {
 				isCollapse: false,
@@ -154,12 +166,23 @@
 				sickIndex: 0,
 				bedIndex: 0,
 				startIndex: 0.,
-				endIndex: 0
+				endIndex: 0,
+				titleLength:'0',
 			}
 		},
 		methods: {
 			bindPickerChange: function(e) {
 				this.index = e.target.value
+			},
+			refused(){
+				this.$refs.popup.open()
+			},
+			refusedInput(e){
+				
+				this.titleLength = e.detail.value.length;
+			},
+			refusedSubmit(){
+				this.$refs.popup.close()
 			},
 		}
 	}
@@ -341,6 +364,51 @@
 				text-align: center;
 				background-color: #0084FD;
 				border-radius: 44upx;
+			}
+		}
+		.addPharmacy{
+			background:rgba(255,255,255,1);
+			border-radius:20upx 20upx 0upx 0upx;
+			width: 100%;
+			padding: 88upx 24upx 37upx;
+			.h2{
+				width: 100%;
+				color: #07103C;
+				font-size: 44upx;
+				margin-bottom: 30upx;
+				font-weight:bold;
+				
+			}
+			.dialogTextarea{
+				background:rgba(242,243,245,1);
+				border-radius:20upx;
+				position: relative;
+				margin-bottom: 55upx;
+				uni-textarea{
+					width: 100%;
+					height: 210upx;
+					padding: 30upx 24upx 50upx;
+					color: #020221;
+					font-size: 26upx;
+				}
+				.garyBox{
+					position: absolute;
+					bottom: 20upx;
+					right: 30upx;
+					color: #B5B5B5;
+					font-size: 24upx;
+				}
+			}
+			.refusedButton{
+				width:500upx;
+				height:78upx;
+				background:rgba(0,132,253,1);
+				border-radius:39upx;
+				margin: 0 auto;
+				line-height: 78upx;
+				text-align: center;
+				font-size: 34upx;
+				color: #fff;
 			}
 		}
 	}

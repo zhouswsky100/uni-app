@@ -31,7 +31,7 @@
 					</view>
 				</view>
 				<view class="right">
-					<view class="toFinish">查看</view>
+					<view class="toFinish" @click="seeData">查看</view>
 				</view>
 			</view>
 			<view class="banner1">
@@ -43,7 +43,7 @@
 					</view>
 				</view>
 				<view class="right">
-					<view class="toFinish">去完成</view>
+					<view class="toFinish" @click="guide">去完成</view>
 					<!-- <image class="done" src="@/static/health/stamp.png"></image> -->
 				</view>
 			</view>
@@ -69,6 +69,34 @@
 				uni.navigateTo({
 				    url: '/pages/bsoftMedical/health/identify-manage?id='+this.listId
 				});
+			},
+			seeData(){
+				const self = this;
+				if(self.finishIdentify=='0'){
+					uni.showToast({
+					    title: '请先完成中医体质辨识',
+					    duration: 2000,
+						icon:'none'
+					});
+				}else{
+					uni.navigateTo({
+					    url: '/pages/bsoftMedical/health/identify-result'
+					});
+				}
+			},
+			guide(){
+				const self = this;
+				if(self.finishIdentify=='0'){
+					uni.showToast({
+					    title: '请先完成中医体质辨识',
+					    duration: 2000,
+						icon:'none'
+					});
+				}else{
+					uni.navigateTo({
+					    url: '/pages/bsoftMedical/health/guide'
+					});
+				}
 			}
 		},
 		onLoad(option){

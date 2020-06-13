@@ -1,7 +1,7 @@
 <template>
 	<view class="warp">
 		<view class="headerBox">
-			<view class="headerInner1">
+			<view class="headerInner1" @click="notYet()">
 				<view class="outer1">
 					<view class="imgBox">
 						<image class="referral_track" src="@/static/juming/referral_track.png"></image>
@@ -9,7 +9,7 @@
 				</view>
 				<view class="outer2">转诊跟踪</view>
 			</view>
-			<view class="headerInner1 headerInner2">
+			<view class="headerInner1 headerInner2" @click="notYet()">
 				<view class="outer1">
 					<view class="imgBox">
 						<image class="diagnos_track" src="@/static/juming/diagnos_track.png"></image>
@@ -26,7 +26,7 @@
 				</view>
 			</view>
 			<view class="scrollBox" v-show="checkType==0">
-				<view class="contentInner1" v-for="(item,index) in keyList" :key="index">
+				<view class="contentInner1" v-for="(item,index) in keyList" :key="index" @click="lookPeople">
 					<view class="contentOuter1">{{item.name}}</view>
 					<view class="contentOuter2">
 						<view>{{item.num}}人</view>
@@ -36,7 +36,7 @@
 			</view>
 			<view class="scrollBox" v-show="checkType==1">
 				<view v-if="customList.length>0">
-					<view class="contentInner1" v-for="(item,index) in customList" :key="index">
+					<view class="contentInner1" v-for="(item,index) in customList" :key="index" @click="lookPeople">
 						<view class="contentOuter1">{{item.name}}</view>
 						<view class="contentOuter2">
 							<view>{{item.num}}人</view>
@@ -123,6 +123,18 @@
 				    url: '/pages/bsoftMedical/dwellings/custom-list'
 				});
 			},
+			lookPeople(){
+				uni.navigateTo({
+				    url: '/pages/bsoftMedical/dwellings/people-list'
+				});
+			},
+			notYet(){
+				uni.showToast({
+				    title: '功能完善中',
+				    duration: 2000,
+					icon:'none'
+				});
+			}
 		}
 	}
 </script>

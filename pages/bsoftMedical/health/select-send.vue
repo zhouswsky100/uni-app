@@ -183,45 +183,45 @@
 				member:false,
 				memberList:[
 					{
-						name:'王熙凤',
-						male:'女',
+						name:'范秋阳',
+						male:'男',
 						brithday:'1952-06-20',
 						type:'0'//0是未选1是选中2是存在
 					},
 					{
-						name:'史湘云',
+						name:'罗志勇',
 						male:'男',
-						brithday:'1982-06-20',
+						brithday:'1958-01-21',
 						type:'0'//0是未选1是选中2是存在
 					},
 					{
-						name:'贾探春',
+						name:'金睿广',
 						male:'男',
-						brithday:'1992-06-20',
+						brithday:'1961-03-20',
 						type:'0'//0是未选1是选中2是存在
 					},
 					{
-						name:'张三',
+						name:'史阳文',
 						male:'男',
-						brithday:'1982-08-20',
+						brithday:'1960-08-15',
 						type:'0'//0是未选1是选中2是存在
 					},
 					{
-						name:'李四',
+						name:'吕欣嘉',
 						male:'女',
-						brithday:'1999-06-12',
+						brithday:'1956-12-14',
 						type:'0'//0是未选1是选中2是存在
 					},
 					{
-						name:'王五',
+						name:'融光亮',
 						male:'男',
-						brithday:'1998-12-20',
+						brithday:'1965-02-02',
 						type:'0'//0是未选1是选中2是存在
 					},
 					{
 						name:'赵柳',
 						male:'女',
-						brithday:'2000-02-13',
+						brithday:'1968-02-13',
 						type:'0'//0是未选1是选中2是存在
 					}
 				],
